@@ -1,0 +1,12 @@
+
+**/target/
+**/**/target
+**/.flattened-pom.xml
+.DS_Store
+classes/
+target/
+
+.idea
+*.iml
+*.log
+*.log.*

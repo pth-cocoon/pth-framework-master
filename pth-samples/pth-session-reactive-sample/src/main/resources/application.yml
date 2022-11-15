@@ -1,0 +1,11 @@
+server:
+  port: 9091
+spring:
+  redis:
+    host: ${redis_host}
+    password: ${redis_password}
+pth:
+  session:
+    store-type: REDIS
+    request-position: header
+    session-id-key: token

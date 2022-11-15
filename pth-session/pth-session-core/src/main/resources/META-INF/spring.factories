@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  vin.pth.session.core.config.SessionCoreConfig
+
