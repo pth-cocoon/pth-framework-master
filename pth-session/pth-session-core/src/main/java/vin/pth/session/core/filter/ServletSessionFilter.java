@@ -11,8 +11,10 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.web.servlet.filter.OrderedFilter;
 import org.springframework.util.CollectionUtils;
+import org.springframework.web.util.ContentCachingRequestWrapper;
 import vin.pth.session.core.config.PthSessionProperties;
 import vin.pth.session.core.context.ServletSessionHolder;
 import vin.pth.session.core.repository.SessionRepository;
@@ -21,6 +23,7 @@ import vin.pth.session.core.repository.SessionRepository;
  * @author Cocoon
  * @date 2022/11/14
  */
+@Slf4j
 @RequiredArgsConstructor
 public final class ServletSessionFilter implements OrderedFilter {
 
@@ -30,8 +33,12 @@ public final class ServletSessionFilter implements OrderedFilter {
   @Override
   public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse,
       FilterChain filterChain) throws IOException, ServletException {
+    log.info(this.getClass().getName());
     HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
     HttpServletResponse httpServletResponse = (HttpServletResponse) servletResponse;
+    var wrapper = new ContentCachingRequestWrapper(httpServletRequest);
+    wrapper.getInputStream().readAllBytes();
+    servletRequest.setAttribute(ContentCachingRequestWrapper.class.getName(), wrapper);
     String sessionId = switch (properties.getRequestPosition()) {
       case COOKIE -> getSessionInCookie(httpServletRequest);
       case HEADER -> getSessionIdInHeader(httpServletRequest);

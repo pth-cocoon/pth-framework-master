@@ -21,9 +21,8 @@ public class RedisConfig {
       RedisConnectionFactory redisConnectionFactory) {
     RedisTemplate<Object, Object> template = new RedisTemplate<>();
     template.setConnectionFactory(redisConnectionFactory);
-    //使用JSON格式的序列化,保存
     template.setKeySerializer(new StringRedisSerializer());
-    template.setHashKeySerializer(new GenericJackson2JsonRedisSerializer());
+    template.setHashKeySerializer(new StringRedisSerializer());
     template.setValueSerializer(new GenericJackson2JsonRedisSerializer());
     template.setHashValueSerializer(new GenericJackson2JsonRedisSerializer());
     return template;

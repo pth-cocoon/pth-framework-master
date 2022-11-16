@@ -10,6 +10,7 @@
   <modules>
     <module>pth-session</module>
     <module>pth-samples</module>
+    <module>pth-security</module>
   </modules>
   <packaging>pom</packaging>
 
