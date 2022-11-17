@@ -5,7 +5,7 @@
   <parent>
     <artifactId>pth-samples</artifactId>
     <groupId>vin.pth</groupId>
-    <version>0.0.1</version>
+    <version>${revision}</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
 
@@ -22,6 +22,12 @@
     <dependency>
       <groupId>vin.pth</groupId>
       <artifactId>pth-security-authentication</artifactId>
+      <version>${revision}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>vin.pth</groupId>
+      <artifactId>pth-security-authorization</artifactId>
       <version>${revision}</version>
     </dependency>
 

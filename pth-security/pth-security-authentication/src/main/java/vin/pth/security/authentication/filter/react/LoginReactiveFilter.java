@@ -38,7 +38,6 @@ public class LoginReactiveFilter implements WebFilter {
   private final AuthenticationSuccessHandler authenticationSuccessHandler;
   private final AuthenticationFailureHandler authenticationFailureHandler;
   private final ProviderManager providerManager;
-
   private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
   @Override

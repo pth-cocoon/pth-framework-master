@@ -12,7 +12,9 @@ import org.springframework.web.server.WebFilter;
 import org.springframework.web.server.WebFilterChain;
 import reactor.core.publisher.Mono;
 import vin.pth.security.authorization.component.RbacChecker;
+import vin.pth.security.authorization.config.AuthorizationProperties;
 import vin.pth.security.authorization.handler.reactive.AuthorizationFailureHandler;
+import vin.pth.security.authorization.util.AuthCheckUtil;
 import vin.pth.security.core.exception.AuthorizationException;
 import vin.pth.security.core.model.UserAuthInfo;
 
@@ -26,15 +28,16 @@ import vin.pth.security.core.model.UserAuthInfo;
 @Component
 public class AuthorizationReactiveFilter implements WebFilter {
 
-  private final static String DEFAULT_LOGIN_URI = "/login";
   private final RbacChecker rbacChecker;
   private final AuthorizationFailureHandler authorizationFailureHandler;
+  private final AuthorizationProperties authorizationProperties;
 
   @Override
   public Mono<Void> filter(ServerWebExchange exchange, WebFilterChain chain) {
     ServerHttpRequest request = exchange.getRequest();
     ServerHttpResponse response = exchange.getResponse();
-    if (inWhiteList(request.getURI().getPath())) {
+    if (!AuthCheckUtil.checkList(request.getMethod().name(), request.getURI().getPath(),
+        authorizationProperties.getWhiteList())) {
       log.info("{}路径属于白名单，跳过校验", request.getURI().getPath());
       return chain.filter(exchange);
     }
@@ -49,10 +52,5 @@ public class AuthorizationReactiveFilter implements WebFilter {
         e -> authorizationFailureHandler.failureHandler(response, e));
   }
 
-  private boolean inWhiteList(String uri) {
-    if (DEFAULT_LOGIN_URI.equals(uri)) {
-      return true;
-    }
-    return false;
-  }
+
 }

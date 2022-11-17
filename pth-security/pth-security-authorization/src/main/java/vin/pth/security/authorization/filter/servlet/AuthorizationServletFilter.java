@@ -14,7 +14,10 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplicat
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication.Type;
 import org.springframework.stereotype.Component;
 import vin.pth.security.authorization.component.RbacChecker;
+import vin.pth.security.authorization.config.AuthorizationProperties;
 import vin.pth.security.authorization.handler.servlet.AuthorizationFailureHandler;
+import vin.pth.security.authorization.util.AuthCheckUtil;
+import vin.pth.security.authorization.util.AuthorizationAssert;
 import vin.pth.security.core.context.UserAuthServletHolder;
 import vin.pth.security.core.exception.AuthorizationException;
 
@@ -29,28 +32,25 @@ import vin.pth.security.core.exception.AuthorizationException;
 public class AuthorizationServletFilter implements Filter {
 
   private final RbacChecker rbacChecker;
+  private final AuthorizationProperties authorizationProperties;
   private final AuthorizationFailureHandler authorizationFailureHandler;
 
   @Override
   public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse,
       FilterChain filterChain) throws IOException, ServletException {
-
     HttpServletRequest request = (HttpServletRequest) servletRequest;
     HttpServletResponse response = (HttpServletResponse) servletResponse;
     try {
-      if (!inWhiteList(request.getRequestURI())) {
-        rbacChecker.check(request.getMethod(), request.getRequestURI(),
+      if (!AuthCheckUtil.checkList(request.getMethod(), request.getRequestURI(),
+          authorizationProperties.getWhiteList())) {
+        boolean passed = rbacChecker.check(request.getMethod(), request.getRequestURI(),
             UserAuthServletHolder.getUserAuthInfo());
+        AuthorizationAssert.isTrue(passed, "对不起，权限不足");
       }
       filterChain.doFilter(servletRequest, servletResponse);
     } catch (AuthorizationException e) {
       authorizationFailureHandler.failureHandler(response, e);
-    } finally {
-      UserAuthServletHolder.clear();
     }
   }
 
-  private boolean inWhiteList(String uri) {
-    return "/login".equals(uri);
-  }
 }
