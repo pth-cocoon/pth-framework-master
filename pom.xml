@@ -38,6 +38,13 @@
 
   </dependencyManagement>
 
+  <distributionManagement>
+    <repository>
+      <id>qcloud_153020-pth-common</id>
+      <name>common</name>
+      <url>https://qcloud_153020-maven.pkg.coding.net/repository/pth/common/</url>
+    </repository>
+  </distributionManagement>
 
   <build>
     <plugins>
