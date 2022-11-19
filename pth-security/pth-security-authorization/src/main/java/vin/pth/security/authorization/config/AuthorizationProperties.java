@@ -14,8 +14,6 @@ import vin.pth.security.core.model.Authority;
 @Data
 public class AuthorizationProperties {
 
-  private String test = "123";
-
   private Collection<Authority> whiteList = new ArrayList<>();
 
 }

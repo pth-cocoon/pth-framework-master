@@ -22,6 +22,12 @@
 
     <dependency>
       <groupId>vin.pth</groupId>
+      <artifactId>pth-security-authorization</artifactId>
+      <version>${revision}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>vin.pth</groupId>
       <artifactId>pth-session-data-redis</artifactId>
       <version>${revision}</version>
     </dependency>
