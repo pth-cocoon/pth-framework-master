@@ -1,5 +1,6 @@
 package vin.pth.security.core.context;
 
+import java.util.Optional;
 import org.springframework.lang.NonNull;
 import org.springframework.util.Assert;
 import reactor.core.publisher.Mono;
@@ -12,6 +13,7 @@ import vin.pth.session.core.context.ReactiveSessionHolder;
  * @author Cocoon
  * @date 2022/11/5
  */
+@SuppressWarnings("unused")
 public class UserAuthReactiveHolder {
 
   public static Mono<PthSession> setUserAuthInfo(@NonNull UserAuthInfo userAuthInfo) {
@@ -22,10 +24,15 @@ public class UserAuthReactiveHolder {
     });
   }
 
-  public static Mono<UserAuthInfo> getUserAuthInfo() {
+  public static Mono<Optional<UserAuthInfo>> getUserAuthInfo() {
     return ReactiveSessionHolder.getSession().map(session -> {
       Assert.notNull(session, "session is null");
-      return (UserAuthInfo) session.getSessionData().get(SecurityCoreConstant.USER_AUTH_INFO_KEY);
+      UserAuthInfo userAuthInfo =
+          (UserAuthInfo) session.getSessionData().get(SecurityCoreConstant.USER_AUTH_INFO_KEY);
+      if (userAuthInfo != null) {
+        return Optional.of(userAuthInfo);
+      }
+      return Optional.empty();
     });
   }
 

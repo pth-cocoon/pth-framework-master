@@ -9,3 +9,8 @@ pth:
     store-type: REDIS
     request-position: header
     session-id-key: token
+  security:
+    authorization:
+      white-list:
+        - uri: /login
+          method: POST

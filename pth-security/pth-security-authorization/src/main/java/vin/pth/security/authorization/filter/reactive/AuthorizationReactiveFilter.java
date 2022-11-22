@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplicat
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.stereotype.Component;
+import org.springframework.util.Assert;
 import org.springframework.web.server.ServerWebExchange;
 import org.springframework.web.server.WebFilter;
 import org.springframework.web.server.WebFilterChain;
@@ -15,8 +16,8 @@ import vin.pth.security.authorization.component.RbacChecker;
 import vin.pth.security.authorization.config.AuthorizationProperties;
 import vin.pth.security.authorization.handler.reactive.AuthorizationFailureHandler;
 import vin.pth.security.authorization.util.AuthCheckUtil;
+import vin.pth.security.core.context.UserAuthReactiveHolder;
 import vin.pth.security.core.exception.AuthorizationException;
-import vin.pth.security.core.model.UserAuthInfo;
 
 /**
  * @author Cocoon
@@ -36,18 +37,17 @@ public class AuthorizationReactiveFilter implements WebFilter {
   public Mono<Void> filter(ServerWebExchange exchange, WebFilterChain chain) {
     ServerHttpRequest request = exchange.getRequest();
     ServerHttpResponse response = exchange.getResponse();
-    if (!AuthCheckUtil.checkList(request.getMethod().name(), request.getURI().getPath(),
+    Assert.notNull(request.getMethod(), "Method is null");
+    if (AuthCheckUtil.checkList(request.getMethod().name(), request.getURI().getPath(),
         authorizationProperties.getWhiteList())) {
       log.info("{}路径属于白名单，跳过校验", request.getURI().getPath());
       return chain.filter(exchange);
     }
 
-    return exchange.getSession().flatMap(webSession -> {
-      UserAuthInfo userAuthInfo = (UserAuthInfo) webSession.getAttributes().get("USER_INFO");
-      log.info("UserInfo:{}", userAuthInfo);
+    return UserAuthReactiveHolder.getUserAuthInfo().flatMap(userAuthInfo -> {
+
       rbacChecker.check(request.getMethod().name(), request.getURI().getPath(), userAuthInfo);
-      return chain.filter(exchange)
-          .contextWrite(context -> context.put(UserAuthInfo.class, userAuthInfo));
+      return chain.filter(exchange);
     }).onErrorResume(AuthorizationException.class,
         e -> authorizationFailureHandler.failureHandler(response, e));
   }

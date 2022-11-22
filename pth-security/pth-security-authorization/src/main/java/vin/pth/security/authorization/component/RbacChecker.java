@@ -1,5 +1,6 @@
 package vin.pth.security.authorization.component;
 
+import java.util.Optional;
 import vin.pth.security.core.model.UserAuthInfo;
 
 /**
@@ -14,8 +15,6 @@ public interface RbacChecker {
    * @param method       HttpMethod
    * @param uri          请求路径
    * @param userAuthInfo 用户权限信息.
-   * @return true=pass
    */
-  boolean check(String method, String uri, UserAuthInfo userAuthInfo);
-
+  void check(String method, String uri, Optional<UserAuthInfo> userAuthInfo);
 }

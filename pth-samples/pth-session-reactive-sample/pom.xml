@@ -25,7 +25,11 @@
       <artifactId>pth-security-authorization</artifactId>
       <version>${revision}</version>
     </dependency>
-
+    <dependency>
+      <groupId>vin.pth</groupId>
+      <artifactId>pth-security-authentication</artifactId>
+      <version>${revision}</version>
+    </dependency>
     <dependency>
       <groupId>vin.pth</groupId>
       <artifactId>pth-session-data-redis</artifactId>
@@ -35,6 +39,10 @@
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-data-redis</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
     </dependency>
   </dependencies>
 

@@ -34,7 +34,9 @@ public final class ReactiveSessionFilter implements OrderedWebFilter {
       case HEADER -> getSessionIdInHeader(exchange.getRequest());
     };
     var session = sessionRepository.getOrCreateSession(sessionId);
-    var cookie = ResponseCookie.from(properties.getSessionIdKey(), session.getSessionId()).build();
+    var cookie =
+        ResponseCookie.from(properties.getSessionIdKey(), session.getSessionId()).httpOnly(true)
+            .maxAge(properties.getTimeout()).build();
     exchange.getResponse().addCookie(cookie);
     return chain.filter(exchange)
         .contextWrite(context -> ReactiveSessionHolder.withSession(session))

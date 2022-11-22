@@ -7,6 +7,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import vin.pth.security.authorization.component.RbacChecker;
 import vin.pth.security.authorization.util.AuthCheckUtil;
+import vin.pth.security.core.exception.AuthorizationException;
 
 /**
  * @author Cocoon
@@ -20,8 +21,10 @@ public class AuthorizationConfig {
 
   @Bean
   public RbacChecker rbacChecker() {
-    return (method, uri, userAuthInfo) -> AuthCheckUtil.checkList(method, uri,
-        userAuthInfo.getAuthorities());
+    return (method, uri, userAuthInfo) -> userAuthInfo.ifPresentOrElse(
+        u -> AuthCheckUtil.checkList(method, uri, userAuthInfo.get().getAuthorities()), () -> {
+          throw new AuthorizationException(401, "用户信息为空");
+        });
   }
 
 

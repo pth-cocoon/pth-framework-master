@@ -17,7 +17,6 @@ import vin.pth.security.authorization.component.RbacChecker;
 import vin.pth.security.authorization.config.AuthorizationProperties;
 import vin.pth.security.authorization.handler.servlet.AuthorizationFailureHandler;
 import vin.pth.security.authorization.util.AuthCheckUtil;
-import vin.pth.security.authorization.util.AuthorizationAssert;
 import vin.pth.security.core.context.UserAuthServletHolder;
 import vin.pth.security.core.exception.AuthorizationException;
 
@@ -43,9 +42,8 @@ public class AuthorizationServletFilter implements Filter {
     try {
       if (!AuthCheckUtil.checkList(request.getMethod(), request.getRequestURI(),
           authorizationProperties.getWhiteList())) {
-        boolean passed = rbacChecker.check(request.getMethod(), request.getRequestURI(),
+        rbacChecker.check(request.getMethod(), request.getRequestURI(),
             UserAuthServletHolder.getUserAuthInfo());
-        AuthorizationAssert.isTrue(passed, "对不起，权限不足");
       }
       filterChain.doFilter(servletRequest, servletResponse);
     } catch (AuthorizationException e) {
