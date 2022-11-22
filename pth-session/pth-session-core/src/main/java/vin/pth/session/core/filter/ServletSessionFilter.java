@@ -33,6 +33,7 @@ public final class ServletSessionFilter implements OrderedFilter {
   @Override
   public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse,
       FilterChain filterChain) throws IOException, ServletException {
+    servletResponse.setCharacterEncoding("UTF-8");
     HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
     HttpServletResponse httpServletResponse = (HttpServletResponse) servletResponse;
     var wrapper = new ContentCachingRequestWrapper(httpServletRequest);

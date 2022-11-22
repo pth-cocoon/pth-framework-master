@@ -1,6 +1,8 @@
 package vin.pth.security.authentication.config;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication.Type;
@@ -15,8 +17,8 @@ import vin.pth.session.core.context.ServletSessionHolder;
  * @author Cocoon
  * @date 2022/11/3
  */
+@Slf4j
 @Configuration
-
 @ConditionalOnWebApplication(type = Type.SERVLET)
 public class AuthenticationServletConfig {
 
@@ -25,7 +27,14 @@ public class AuthenticationServletConfig {
   @Bean
   public AuthenticationFailureHandler authenticationFailureHandler() {
     return (request, response, e) -> {
+
+      log.error("授权失败：", e);
       response.setStatus(401);
+      try {
+        response.getWriter().write(new String(e.getMessage().getBytes(StandardCharsets.UTF_8)));
+      } catch (IOException ex) {
+        response.setStatus(500);
+      }
     };
   }
 

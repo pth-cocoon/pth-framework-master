@@ -1,5 +1,5 @@
 server:
-  port: 9090
+  port: 19090
 spring:
   redis:
     host: ${redis_host}
@@ -15,4 +15,6 @@ pth:
       white-list:
         - uri: /login/**
           method: GET
+    authentication:
+      login-uri: /login
 
