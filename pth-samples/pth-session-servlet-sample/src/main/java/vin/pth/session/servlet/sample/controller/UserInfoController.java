@@ -16,7 +16,7 @@ public class UserInfoController {
 
   @GetMapping("get")
   public UserAuthInfo userAuthInfo() {
-    return UserAuthServletHolder.getUserAuthInfo();
+    return UserAuthServletHolder.getUserAuthInfo().orElse(null);
   }
 
 }
