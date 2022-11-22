@@ -1,5 +1,6 @@
 package vin.pth.session.servlet.sample.controller;
 
+import java.util.Optional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,7 +17,8 @@ public class UserInfoController2 {
 
   @GetMapping("get")
   public UserAuthInfo userAuthInfo() {
-    return UserAuthServletHolder.getUserAuthInfo();
+    Optional<UserAuthInfo> optionalUser = UserAuthServletHolder.getUserAuthInfo();
+    return optionalUser.orElse(null);
   }
 
 }
