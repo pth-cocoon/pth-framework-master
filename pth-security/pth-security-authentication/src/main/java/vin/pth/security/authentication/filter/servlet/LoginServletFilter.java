@@ -18,13 +18,13 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplicat
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication.Type;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
-import org.springframework.web.util.ContentCachingRequestWrapper;
 import vin.pth.security.authentication.handler.sevlet.AuthenticationFailureHandler;
 import vin.pth.security.authentication.handler.sevlet.AuthenticationSuccessHandler;
 import vin.pth.security.authentication.provider.ProviderManager;
 import vin.pth.security.core.context.UserAuthServletHolder;
 import vin.pth.security.core.exception.AuthenticationException;
 import vin.pth.security.core.model.UserAuthInfo;
+import vin.pth.session.core.context.CustomRequestWrapper;
 
 /**
  * @author Cocoon
@@ -44,15 +44,12 @@ public class LoginServletFilter implements Filter {
   @Override
   public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse,
       FilterChain filterChain) throws ServletException, IOException {
-    HttpServletRequest httpRequest = (HttpServletRequest) servletRequest;
-    if (!support(httpRequest)) {
+    CustomRequestWrapper wrapper = (CustomRequestWrapper) servletRequest;
+    if (!support(wrapper)) {
       filterChain.doFilter(servletRequest, servletResponse);
       return;
     }
     try {
-      ContentCachingRequestWrapper wrapper =
-          (ContentCachingRequestWrapper) httpRequest.getAttribute(
-              ContentCachingRequestWrapper.class.getName());
       UserAuthInfo authenticate = providerManager.authenticate(getBody(wrapper));
       UserAuthServletHolder.setUserAuthInfo(authenticate);
       successHandler.successHandler((HttpServletRequest) servletRequest,
@@ -64,10 +61,9 @@ public class LoginServletFilter implements Filter {
 
   }
 
-  private Map<String, Object> getBody(ContentCachingRequestWrapper wrapper) {
-    byte[] contentAsByteArray = wrapper.getContentAsByteArray();
+  private Map<String, Object> getBody(CustomRequestWrapper wrapper) {
     try {
-      return OBJECT_MAPPER.readValue(contentAsByteArray, new TypeReference<>() {
+      return OBJECT_MAPPER.readValue(wrapper.getBody(), new TypeReference<>() {
       });
     } catch (IOException e) {
       log.error("e:", e);

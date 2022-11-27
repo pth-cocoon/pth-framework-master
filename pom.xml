@@ -11,6 +11,8 @@
     <module>pth-session</module>
     <module>pth-samples</module>
     <module>pth-security</module>
+    <module>pth-base-dao</module>
+    <module>pth-base-dao/pth-base-dao-mbp</module>
   </modules>
   <packaging>pom</packaging>
 

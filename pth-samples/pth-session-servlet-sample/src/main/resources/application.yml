@@ -13,8 +13,7 @@ pth:
     authorization:
       test: test
       white-list:
-        - uri: /login/**
-          method: GET
+        - uri: /**
     authentication:
       login-uri: /login
 

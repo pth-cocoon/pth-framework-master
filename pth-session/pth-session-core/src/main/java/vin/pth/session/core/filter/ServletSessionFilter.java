@@ -14,8 +14,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.web.servlet.filter.OrderedFilter;
 import org.springframework.util.CollectionUtils;
-import org.springframework.web.util.ContentCachingRequestWrapper;
 import vin.pth.session.core.config.PthSessionProperties;
+import vin.pth.session.core.context.CustomRequestWrapper;
 import vin.pth.session.core.context.ServletSessionHolder;
 import vin.pth.session.core.repository.SessionRepository;
 
@@ -36,9 +36,8 @@ public final class ServletSessionFilter implements OrderedFilter {
     servletResponse.setCharacterEncoding("UTF-8");
     HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
     HttpServletResponse httpServletResponse = (HttpServletResponse) servletResponse;
-    var wrapper = new ContentCachingRequestWrapper(httpServletRequest);
+    var wrapper = new CustomRequestWrapper(httpServletRequest);
     wrapper.getInputStream().readAllBytes();
-    servletRequest.setAttribute(ContentCachingRequestWrapper.class.getName(), wrapper);
     String sessionId = switch (properties.getRequestPosition()) {
       case COOKIE -> getSessionInCookie(httpServletRequest);
       case HEADER -> getSessionIdInHeader(httpServletRequest);
@@ -46,7 +45,7 @@ public final class ServletSessionFilter implements OrderedFilter {
     var session = sessionRepository.getOrCreateSession(sessionId);
     ServletSessionHolder.setSession(session);
     try {
-      filterChain.doFilter(servletRequest, servletResponse);
+      filterChain.doFilter(wrapper, servletResponse);
       session = ServletSessionHolder.getSession();
       Cookie sessionCookie = new Cookie(properties.getSessionIdKey(), session.getSessionId());
       sessionCookie.setHttpOnly(true);
@@ -59,6 +58,9 @@ public final class ServletSessionFilter implements OrderedFilter {
   }
 
   private String getSessionInCookie(HttpServletRequest request) {
+    if (request.getCookies() == null) {
+      return "";
+    }
     List<Cookie> cookies = Arrays.stream(request.getCookies())
         .filter(a -> a.getName().equals(properties.getSessionIdKey())).toList();
     if (CollectionUtils.isEmpty(cookies)) {
