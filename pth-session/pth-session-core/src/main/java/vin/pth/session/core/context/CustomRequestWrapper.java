@@ -11,15 +11,15 @@ import javax.servlet.ReadListener;
 import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.util.StringUtils;
 
 /**
  * @author Cocoon
  */
+@Slf4j
 public class CustomRequestWrapper extends HttpServletRequestWrapper {
 
-  private static final Logger logger = LoggerFactory.getLogger(CustomRequestWrapper.class);
   private final String bodyInStringFormat;
 
   public String getBody() {
@@ -30,7 +30,10 @@ public class CustomRequestWrapper extends HttpServletRequestWrapper {
     super(request);
     bodyInStringFormat = readInputStreamInStringFormat(request.getInputStream(),
         Charset.forName(request.getCharacterEncoding()));
-    logger.info("Body: {}", bodyInStringFormat);
+    if (StringUtils.hasText(bodyInStringFormat)) {
+      log.info("RequestBody:{}",
+          (bodyInStringFormat.substring(0, Math.min(1000, bodyInStringFormat.length()))));
+    }
   }
 
 
