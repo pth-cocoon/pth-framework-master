@@ -11,7 +11,7 @@ import vin.pth.base.dao.mbp.model.PageData;
  */
 public class PageUtil {
 
-  public <T> PageData<T> page(ISelect select) {
+  public static <T> PageData<T> page(ISelect select) {
     try (Page<T> page = PageHelper.startPage(1, 10).doSelectPage(select)) {
       return new PageData<>(page);
     }

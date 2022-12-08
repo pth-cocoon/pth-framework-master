@@ -3,6 +3,7 @@ package vin.pth.base.dao.mbp.model;
 import com.github.pagehelper.Page;
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.List;
 import lombok.Data;
 
 /**
@@ -24,5 +25,13 @@ public class PageData<T> implements Serializable {
     this.total = page.getTotal();
     this.pageTotal = page.getPages();
     this.list = page.getResult();
+  }
+
+  public PageData(Page<?> page, List<T> list) {
+    this.pageSize = page.getPageSize();
+    this.pageNumber = page.getPageNum();
+    this.total = page.getTotal();
+    this.pageTotal = page.getPages();
+    this.list = list;
   }
 }
