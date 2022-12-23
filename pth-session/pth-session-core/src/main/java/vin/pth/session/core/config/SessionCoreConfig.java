@@ -59,6 +59,11 @@ public class SessionCoreConfig {
         log.info("Commit session,sessionId:{}", pthSession.getSessionId());
       }
 
+      @Override
+      public void removeSession(PthSession session) {
+        SESSION_DATA.remove(session.getSessionId());
+      }
+
     };
   }
 

@@ -45,13 +45,13 @@ public final class ServletSessionFilter implements OrderedFilter {
     var session = sessionRepository.getOrCreateSession(sessionId);
     ServletSessionHolder.setSession(session);
     try {
-      filterChain.doFilter(wrapper, servletResponse);
       session = ServletSessionHolder.getSession();
       Cookie sessionCookie = new Cookie(properties.getSessionIdKey(), session.getSessionId());
       sessionCookie.setHttpOnly(true);
       sessionCookie.setMaxAge(Math.toIntExact(properties.getTimeout().getSeconds()));
       httpServletResponse.addCookie(sessionCookie);
     } finally {
+      filterChain.doFilter(wrapper, servletResponse);
       ServletSessionHolder.clearSession();
       sessionRepository.commitSession(session);
     }

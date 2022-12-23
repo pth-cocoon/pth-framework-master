@@ -39,7 +39,7 @@ public class CustomRequestWrapper extends HttpServletRequestWrapper {
 
   private String readInputStreamInStringFormat(InputStream stream, Charset charset)
       throws IOException {
-    final int MAX_BODY_SIZE = 1024;
+    final int MAX_BODY_SIZE = 102400;
     final StringBuilder bodyStringBuilder = new StringBuilder();
     if (!stream.markSupported()) {
       stream = new BufferedInputStream(stream);

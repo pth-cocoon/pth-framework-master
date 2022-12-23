@@ -26,4 +26,6 @@ public interface SessionRepository {
    * @param pthSession PthSession.
    */
   void commitSession(PthSession pthSession);
+
+  void removeSession(PthSession session);
 }

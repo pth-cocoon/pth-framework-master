@@ -2,6 +2,7 @@ package vin.pth.session.data.repository;
 
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
@@ -16,6 +17,7 @@ import vin.pth.session.data.config.PthRedisSessionProperties;
  * @author Cocoon
  * @date 2022/11/14
  */
+@Slf4j
 @ConditionalOnProperty(value = "pth.session.store-type", havingValue = "REDIS")
 @Component
 @RequiredArgsConstructor
@@ -55,11 +57,19 @@ public class RedisSessionRepository implements SessionRepository {
 
   @Override
   public void commitSession(PthSession pthSession) {
-    Assert.notNull(pthSession, "PthSession为空!");
+    if (pthSession == null) {
+      log.warn("Session is null!");
+      return;
+    }
     Assert.isTrue(StringUtils.hasText(pthSession.getSessionId()), "SessionId为空！");
     String sessionId = pthSession.getSessionId();
     redisTemplate.opsForValue()
         .set(buildKey(sessionId), pthSession, sessionProperties.getTimeout());
+  }
+
+  @Override
+  public void removeSession(PthSession session) {
+    redisTemplate.delete(buildKey(session.getSessionId()));
   }
 
   private String buildKey(String sessionId) {
