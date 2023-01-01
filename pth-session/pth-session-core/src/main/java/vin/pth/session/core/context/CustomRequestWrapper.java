@@ -20,6 +20,7 @@ import org.springframework.util.StringUtils;
 @Slf4j
 public class CustomRequestWrapper extends HttpServletRequestWrapper {
 
+  private final static String CONTENT_TYPE_MULTIPART = "multipart/form-data";
   private final String bodyInStringFormat;
 
   public String getBody() {
@@ -28,6 +29,12 @@ public class CustomRequestWrapper extends HttpServletRequestWrapper {
 
   public CustomRequestWrapper(HttpServletRequest request) throws IOException {
     super(request);
+    if (request.getContentType() != null && request.getContentType()
+        .contains(CONTENT_TYPE_MULTIPART)) {
+      bodyInStringFormat = "";
+      log.info("文件上传接口");
+      return;
+    }
     bodyInStringFormat = readInputStreamInStringFormat(request.getInputStream(),
         Charset.forName(request.getCharacterEncoding()));
     if (StringUtils.hasText(bodyInStringFormat)) {
