@@ -1,0 +1,1 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=vin.pth.security.core.config.SecurityCoreConfig

@@ -1,55 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://maven.apache.org/POM/4.0.0"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>vin.pth</groupId>
-  <artifactId>pth-framework-master</artifactId>
-  <version>${revision}</version>
-  <modules>
-    <module>pth-session</module>
-    <module>pth-samples</module>
-    <module>pth-security</module>
-    <module>pth-base</module>
-    <module>pth-security</module>
-  </modules>
-  <packaging>pom</packaging>
-
-  <properties>
-    <revision>0.0.1</revision>
-    <maven.compiler.source>17</maven.compiler.source>
-    <maven.compiler.target>17</maven.compiler.target>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <spring-boot.version>2.7.5</spring-boot.version>
-
-  </properties>
-
-  <dependencyManagement>
-    <dependencies>
-
-      <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-dependencies</artifactId>
-        <version>${spring-boot.version}</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-
-    </dependencies>
-
-  </dependencyManagement>
-
-  <distributionManagement>
-    <repository>
-      <id>qcloud_153020-pth-common</id>
-      <name>common</name>
-      <url>https://qcloud_153020-maven.pkg.coding.net/repository/pth/common/</url>
-    </repository>
-  </distributionManagement>
-
   <build>
     <plugins>
+
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>17</source>
+          <target>17</target>
+        </configuration>
+        <groupId>org.apache.maven.plugins</groupId>
+        <version>3.1</version>
+      </plugin>
+
       <plugin>
         <artifactId>maven-source-plugin</artifactId>
         <configuration>
@@ -97,5 +64,48 @@
     </plugins>
 
   </build>
+  <artifactId>pth-framework-master</artifactId>
+  <groupId>vin.pthframework</groupId>
+  <modules>
+    <module>pth-samples</module>
+    <module>pth-security</module>
+    <module>pth-base</module>
+  </modules>
+  <packaging>pom</packaging>
+
+  <properties>
+    <revision>0.0.1</revision>
+    <java.version>17</java.version>
+    <maven.compiler.source>17</maven.compiler.source>
+    <maven.compiler.target>17</maven.compiler.target>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <spring-boot.version>2.7.5</spring-boot.version>
+
+  </properties>
+
+  <dependencyManagement>
+    <dependencies>
+
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-dependencies</artifactId>
+        <version>${spring-boot.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+
+    </dependencies>
+
+  </dependencyManagement>
+
+  <distributionManagement>
+    <repository>
+      <id>qcloud_153020-pth-common</id>
+      <name>common</name>
+      <url>https://qcloud_153020-maven.pkg.coding.net/repository/pth/common/</url>
+    </repository>
+  </distributionManagement>
+
+  <version>0.0.1</version>
 
 </project>

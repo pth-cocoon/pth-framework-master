@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <parent>
-        <artifactId>pth-framework-master</artifactId>
-        <groupId>vin.pth</groupId>
-        <version>0.0.1</version>
-    </parent>
-    <modelVersion>4.0.0</modelVersion>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <artifactId>pth-security</artifactId>
+  <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>pth-security</artifactId>
-
-    <properties>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
+  <modules>
+    <module>pth-security-core</module>
+    <module>pth-security-servlet</module>
+    <module>pth-security-reactive</module>
+  </modules>
+  <packaging>pom</packaging>
+  <parent>
+    <artifactId>pth-framework-master</artifactId>
+    <groupId>vin.pthframework</groupId>
+    <relativePath>../pom.xml</relativePath>
+    <version>0.0.1</version>
+  </parent>
 
 </project>

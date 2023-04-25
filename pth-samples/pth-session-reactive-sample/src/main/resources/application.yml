@@ -1,16 +1,16 @@
 server:
-  port: 9091
-spring:
-  redis:
-    host: ${redis_host}
-    password: ${redis_password}
+  port: 19091
 pth:
-  session:
-    store-type: REDIS
-    request-position: header
-    session-id-key: token
   security:
-    authorization:
-      white-list:
-        - uri: /login
-          method: POST
+    core:
+      white-list: /session/put
+      session-key: token
+      session-position: header
+      enable-authorization: on
+spring:
+  session:
+    store-type: redis
+    redis:
+      save-mode: always
+  redis:
+    password: cocoon

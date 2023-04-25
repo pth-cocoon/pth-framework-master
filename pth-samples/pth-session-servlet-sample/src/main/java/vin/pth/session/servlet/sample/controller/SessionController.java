@@ -1,25 +1,37 @@
 package vin.pth.session.servlet.sample.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import vin.pth.session.core.context.PthSession;
-import vin.pth.session.core.context.ServletSessionHolder;
+import vin.pth.security.core.consts.UserAuthInfoConst;
+import vin.pth.security.core.pojo.UserAuthInfo;
+import vin.pth.security.servlet.util.LoginUtil;
+
+import javax.servlet.http.HttpSession;
 
 /**
  * @author Cocoon
  * @date 2022/11/13
  */
+@Slf4j
 @RequestMapping("session")
 @RestController
 public class SessionController {
 
-  @GetMapping("test")
-  public PthSession get() {
-    PthSession session = ServletSessionHolder.getSession();
-    session.getSessionData().put("test", System.currentTimeMillis());
-    session.getSessionData().put("Servlet", "servlet");
-    return ServletSessionHolder.getSession();
+  @GetMapping("put")
+  public String test(HttpSession session) {
+    LoginUtil.login(UserAuthInfoConst.ADMIN_USER, session);
+    return session.getId();
   }
+
+  @GetMapping("get")
+  public UserAuthInfo get(HttpSession session) {
+    log.info(session.getId());
+    UserAuthInfo authInfo = LoginUtil.getAuthInfo(session);
+    authInfo.setSessionId(session.getId());
+    return authInfo;
+  }
+
 
 }

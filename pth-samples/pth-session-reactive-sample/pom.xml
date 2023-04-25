@@ -1,49 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://maven.apache.org/POM/4.0.0"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <parent>
-    <artifactId>pth-samples</artifactId>
-    <groupId>vin.pth</groupId>
-    <version>${revision}</version>
-  </parent>
-  <modelVersion>4.0.0</modelVersion>
-
-  <artifactId>pth-session-reactive-sample</artifactId>
+    <artifactId>pth-session-reactive-sample</artifactId>
+    <dependencies>
 
 
-  <dependencies>
+        <dependency>
+            <artifactId>spring-boot-starter-webflux</artifactId>
+            <groupId>org.springframework.boot</groupId>
+        </dependency>
+        <dependency>
+            <artifactId>pth-security-reactive</artifactId>
+            <groupId>vin.pthframework</groupId>
+            <version>0.0.1</version>
+        </dependency>
 
 
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-webflux</artifactId>
-    </dependency>
+        <dependency>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+            <groupId>org.springframework.boot</groupId>
+        </dependency>
+        <dependency>
+            <artifactId>lombok</artifactId>
+            <groupId>org.projectlombok</groupId>
+        </dependency>
+    </dependencies>
 
-    <dependency>
-      <groupId>vin.pth</groupId>
-      <artifactId>pth-security-authorization</artifactId>
-      <version>${revision}</version>
-    </dependency>
-    <dependency>
-      <groupId>vin.pth</groupId>
-      <artifactId>pth-security-authentication</artifactId>
-      <version>${revision}</version>
-    </dependency>
-    <dependency>
-      <groupId>vin.pth</groupId>
-      <artifactId>pth-session-data-redis</artifactId>
-      <version>${revision}</version>
-    </dependency>
+    <modelVersion>4.0.0</modelVersion>
 
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-data-redis</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.projectlombok</groupId>
-      <artifactId>lombok</artifactId>
-    </dependency>
-  </dependencies>
+
+    <parent>
+        <artifactId>pth-samples</artifactId>
+        <groupId>vin.pthframework</groupId>
+        <version>0.0.1</version>
+    </parent>
 
 </project>

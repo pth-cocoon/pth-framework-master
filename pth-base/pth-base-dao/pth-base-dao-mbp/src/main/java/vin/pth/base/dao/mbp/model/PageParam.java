@@ -1,7 +1,8 @@
 package vin.pth.base.dao.mbp.model;
 
-import java.io.Serializable;
 import lombok.Setter;
+
+import java.io.Serializable;
 
 /**
  * @author Cocoon

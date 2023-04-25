@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  vin.pth.security.servlet.config.SecurityServletConfig
