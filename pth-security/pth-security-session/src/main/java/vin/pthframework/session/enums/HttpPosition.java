@@ -1,4 +1,4 @@
-package vin.pth.security.core.enums;
+package vin.pthframework.session.enums;
 
 /**
  * @author Cocoon

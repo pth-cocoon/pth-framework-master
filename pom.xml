@@ -33,34 +33,6 @@
         <version>3.0.1</version>
       </plugin>
 
-
-      <!-- 统一版本号管理 -->
-      <plugin>
-        <artifactId>flatten-maven-plugin</artifactId>
-        <configuration>
-          <flattenMode>resolveCiFriendliesOnly</flattenMode>
-          <updatePomFile>true</updatePomFile>
-        </configuration>
-        <executions>
-          <execution>
-            <goals>
-              <goal>flatten</goal>
-            </goals>
-            <id>flatten</id>
-            <phase>process-resources</phase>
-          </execution>
-          <execution>
-            <goals>
-              <goal>clean</goal>
-            </goals>
-            <id>flatten.clean</id>
-            <phase>clean</phase>
-          </execution>
-        </executions>
-        <groupId>org.codehaus.mojo</groupId>
-        <version>1.2.7</version>
-      </plugin>
-
     </plugins>
 
   </build>

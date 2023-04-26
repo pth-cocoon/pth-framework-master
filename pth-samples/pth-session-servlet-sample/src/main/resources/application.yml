@@ -7,10 +7,9 @@ pth:
       session-key: token
       session-position: header
       enable-authorization: on
-spring:
   session:
-    store-type: redis
-    redis:
-      save-mode: always
+    core:
+      session-position: header
+spring:
   redis:
     password: cocoon

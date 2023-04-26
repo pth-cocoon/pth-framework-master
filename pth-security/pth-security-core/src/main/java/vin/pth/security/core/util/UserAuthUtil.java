@@ -1,10 +1,10 @@
 package vin.pth.security.core.util;
 
+import java.util.Collection;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.util.Assert;
 import vin.pth.security.core.pojo.UserAuthInfo;
-
-import java.util.Collection;
 
 /**
  * @author Cocoon
@@ -15,6 +15,7 @@ public class UserAuthUtil {
   }
 
   public static Authentication toAuth(UserAuthInfo userAuthInfo) {
+    Assert.notNull(userAuthInfo, "userAuthInfo is null!");
     return new Authentication() {
       @Override
       public Collection<? extends GrantedAuthority> getAuthorities() {

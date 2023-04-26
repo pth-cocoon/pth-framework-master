@@ -9,6 +9,7 @@
     <module>pth-security-core</module>
     <module>pth-security-servlet</module>
     <module>pth-security-reactive</module>
+    <module>pth-security-session</module>
   </modules>
   <packaging>pom</packaging>
   <parent>

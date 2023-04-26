@@ -2,18 +2,19 @@ package vin.pth.security.servlet.config;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import vin.pth.security.core.enums.SecurityErrorCode;
 import vin.pth.security.core.util.ResultUtil;
-
-import java.util.Map;
 
 /**
  * @author Cocoon
@@ -50,6 +51,12 @@ public class SecurityBeanConfig {
       response.flushBuffer();
     };
 
+  }
+
+  @Bean
+  @Primary
+  public InMemoryUserDetailsManager myInMemoryUserDetailsManager() {
+    return new InMemoryUserDetailsManager();
   }
 
 
