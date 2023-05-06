@@ -13,7 +13,13 @@
     <dependency>
       <artifactId>spring-boot-starter-web</artifactId>
       <groupId>org.springframework.boot</groupId>
-      <optional>true</optional>
+      <scope>compile</scope>
+    </dependency>
+
+    <dependency>
+      <artifactId>pth-security-core</artifactId>
+      <groupId>vin.pthframework</groupId>
+      <version>0.0.1</version>
     </dependency>
   </dependencies>
 

@@ -19,6 +19,7 @@
       <artifactId>spring-boot-autoconfigure</artifactId>
       <groupId>org.springframework.boot</groupId>
     </dependency>
+
     <dependency>
       <artifactId>spring-session-core</artifactId>
       <groupId>org.springframework.session</groupId>
@@ -29,6 +30,7 @@
       <groupId>org.springframework.session</groupId>
       <scope>compile</scope>
     </dependency>
+
     <dependency>
       <artifactId>jackson-databind</artifactId>
       <groupId>com.fasterxml.jackson.core</groupId>

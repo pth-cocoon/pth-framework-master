@@ -4,7 +4,7 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <dependencies>
     <dependency>
-      <artifactId>pth-security-session</artifactId>
+      <artifactId>pth-security-servlet</artifactId>
       <groupId>vin.pthframework</groupId>
       <version>0.0.1</version>
     </dependency>

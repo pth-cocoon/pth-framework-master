@@ -1,15 +1,23 @@
 server:
   port: 19090
+  servlet:
+    encoding:
+      force-response: true
 pth:
+  session:
+    core:
+      session-position: header
+      session-key: token
   security:
     core:
       white-list: /session/put
       session-key: token
       session-position: header
       enable-authorization: on
-  session:
-    core:
-      session-position: header
 spring:
+  session:
+    store-type: redis
+    redis:
+      save-mode: always
   redis:
     password: cocoon

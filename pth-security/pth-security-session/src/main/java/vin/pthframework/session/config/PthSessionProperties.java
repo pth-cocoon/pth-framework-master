@@ -5,6 +5,9 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import vin.pthframework.session.enums.HttpPosition;
 import vin.pthframework.session.enums.SessionStoreType;
 
+/**
+ * @author Cocoon
+ */
 @ConfigurationProperties(prefix = "pth.session.core")
 @Data
 public class PthSessionProperties {

@@ -1,0 +1,39 @@
+package vin.pthframework.session.servlet.sample.controller;
+
+import javax.servlet.http.HttpSession;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import vin.pthframework.security.core.consts.UserAuthInfoConst;
+import vin.pthframework.security.core.context.SecurityContext;
+import vin.pthframework.security.servlet.util.LoginUtil;
+import vin.pthframework.security.servlet.util.SecurityContextHolder;
+
+/**
+ * @author Cocoon
+ * @date 2022/11/13
+ */
+@Slf4j
+@RequestMapping("session")
+@RestController
+public class SessionController {
+
+  @GetMapping("put")
+  public String test(HttpSession session) {
+    LoginUtil.login(UserAuthInfoConst.ANONYMOUS);
+    return session.getId();
+  }
+
+  @GetMapping("get")
+  public Object get(HttpSession session) {
+    log.info(session.getId());
+    SecurityContext context = SecurityContextHolder.getContext();
+    if (context.getAuthInfo() == null) {
+      return null;
+    }
+    return context.getAuthInfo();
+  }
+
+
+}

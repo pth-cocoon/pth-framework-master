@@ -13,7 +13,7 @@
     <dependency>
       <artifactId>spring-boot-starter-webflux</artifactId>
       <groupId>org.springframework.boot</groupId>
-      <optional>true</optional>
+      <scope>compile</scope>
     </dependency>
 
     <dependency>
@@ -25,6 +25,12 @@
       <artifactId>spring-boot-autoconfigure</artifactId>
       <groupId>org.springframework.boot</groupId>
     </dependency>
+
+    <dependency>
+      <artifactId>spring-session-data-redis</artifactId>
+      <groupId>org.springframework.session</groupId>
+    </dependency>
+
   </dependencies>
 
   <modelVersion>4.0.0</modelVersion>
@@ -35,12 +41,5 @@
     <relativePath>../pom.xml</relativePath>
     <version>0.0.1</version>
   </parent>
-
-  <properties>
-    <maven.compiler.source>17</maven.compiler.source>
-    <maven.compiler.target>17</maven.compiler.target>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  </properties>
-
 
 </project>

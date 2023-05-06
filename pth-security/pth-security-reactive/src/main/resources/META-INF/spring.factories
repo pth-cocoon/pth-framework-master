@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  vin.pth.security.reactive.config.SecurityReactiveConfig
+  vin.pthframework.security.reactive.config.SecurityReactiveConfig

@@ -1,6 +1,13 @@
 server:
   port: 19091
+  servlet:
+    encoding:
+      force-response: true
 pth:
+  session:
+    core:
+      session-position: header
+      session-key: token
   security:
     core:
       white-list: /session/put
