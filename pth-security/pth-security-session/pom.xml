@@ -26,6 +26,12 @@
     </dependency>
 
     <dependency>
+      <artifactId>spring-boot-starter-webflux</artifactId>
+      <groupId>org.springframework.boot</groupId>
+      <scope>compile</scope>
+    </dependency>
+
+    <dependency>
       <artifactId>spring-session-data-redis</artifactId>
       <groupId>org.springframework.session</groupId>
       <scope>compile</scope>

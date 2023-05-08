@@ -5,12 +5,12 @@ package vin.pthframework.session.enums;
  * @date 2022/11/15
  */
 public enum HttpPosition {
-    /**
-     * 存放在cookie.
-     */
-    COOKIE,
-    /**
-     * 存放在header
-     */
-    HEADER
+  /**
+   * 存放在cookie.
+   */
+  COOKIE,
+  /**
+   * 存放在header
+   */
+  HEADER
 }

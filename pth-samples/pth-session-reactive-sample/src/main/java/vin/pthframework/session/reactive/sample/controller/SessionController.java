@@ -29,7 +29,7 @@ public class SessionController {
   public Mono<UserAuthInfo> get(WebSession session) {
     log.info(session.getId());
     UserAuthInfo authInfo = LoginUtil.getAuthInfo(session);
-    return Mono.just(authInfo);
+    return Mono.justOrEmpty(authInfo);
   }
 
 

@@ -2,6 +2,7 @@ package vin.pthframework.security.reactive.filter;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.annotation.Order;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.stereotype.Component;
@@ -11,6 +12,7 @@ import org.springframework.web.server.WebFilter;
 import org.springframework.web.server.WebFilterChain;
 import reactor.core.publisher.Mono;
 import vin.pthframework.security.core.config.SecurityCoreProperties;
+import vin.pthframework.security.core.consts.FilterOrderConst;
 import vin.pthframework.security.core.exception.BaseSecurityException;
 import vin.pthframework.security.core.util.RbacChecker;
 import vin.pthframework.security.reactive.handler.AuthorizationFailureHandler;
@@ -20,6 +22,7 @@ import vin.pthframework.security.reactive.util.ReactiveSecurityContextHolder;
  * @author Cocoon
  */
 @Slf4j
+@Order(FilterOrderConst.AUTHORIZATION)
 @Component
 @RequiredArgsConstructor
 public class ReactiveAuthenticationFilter implements WebFilter {

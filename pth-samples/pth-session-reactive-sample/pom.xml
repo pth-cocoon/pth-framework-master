@@ -2,38 +2,38 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns="http://maven.apache.org/POM/4.0.0"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <artifactId>pth-session-reactive-sample</artifactId>
-    <dependencies>
+  <artifactId>pth-session-reactive-sample</artifactId>
+  <dependencies>
 
 
-        <dependency>
-            <artifactId>spring-boot-starter-webflux</artifactId>
-            <groupId>org.springframework.boot</groupId>
-        </dependency>
-        <dependency>
-            <artifactId>pth-security-reactive</artifactId>
-            <groupId>vin.pthframework</groupId>
-            <version>0.0.1</version>
-        </dependency>
+    <dependency>
+      <artifactId>spring-boot-starter-webflux</artifactId>
+      <groupId>org.springframework.boot</groupId>
+    </dependency>
+    <dependency>
+      <artifactId>pth-security-reactive</artifactId>
+      <groupId>vin.pthframework</groupId>
+      <version>0.0.1</version>
+    </dependency>
 
 
-        <dependency>
-            <artifactId>spring-boot-starter-data-redis</artifactId>
-            <groupId>org.springframework.boot</groupId>
-        </dependency>
-        <dependency>
-            <artifactId>lombok</artifactId>
-            <groupId>org.projectlombok</groupId>
-        </dependency>
-    </dependencies>
+    <dependency>
+      <artifactId>spring-boot-starter-data-redis-reactive</artifactId>
+      <groupId>org.springframework.boot</groupId>
+    </dependency>
+    <dependency>
+      <artifactId>lombok</artifactId>
+      <groupId>org.projectlombok</groupId>
+    </dependency>
+  </dependencies>
 
-    <modelVersion>4.0.0</modelVersion>
+  <modelVersion>4.0.0</modelVersion>
 
 
-    <parent>
-        <artifactId>pth-samples</artifactId>
-        <groupId>vin.pthframework</groupId>
-        <version>0.0.1</version>
-    </parent>
+  <parent>
+    <artifactId>pth-samples</artifactId>
+    <groupId>vin.pthframework</groupId>
+    <version>0.0.1</version>
+  </parent>
 
 </project>

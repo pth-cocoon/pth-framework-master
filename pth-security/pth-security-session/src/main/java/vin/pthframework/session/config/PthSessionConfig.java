@@ -8,11 +8,17 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.Primary;
 import org.springframework.context.event.EventListener;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 import org.springframework.session.events.SessionCreatedEvent;
 import org.springframework.session.web.http.CookieHttpSessionIdResolver;
 import org.springframework.session.web.http.HeaderHttpSessionIdResolver;
 import org.springframework.session.web.http.HttpSessionIdResolver;
+import org.springframework.web.server.session.CookieWebSessionIdResolver;
+import org.springframework.web.server.session.HeaderWebSessionIdResolver;
+import org.springframework.web.server.session.WebSessionIdResolver;
 
 /**
  * @author Cocoon
@@ -20,6 +26,7 @@ import org.springframework.session.web.http.HttpSessionIdResolver;
 @EnableConfigurationProperties(PthSessionProperties.class)
 @Import(PthRedisSessionConfig.class)
 @Configuration
+@Order(Ordered.LOWEST_PRECEDENCE)
 @Slf4j
 public class PthSessionConfig {
 
@@ -43,6 +50,29 @@ public class PthSessionConfig {
       default -> {
         log.warn("session默认存储在cookie");
         return new CookieHttpSessionIdResolver();
+      }
+    }
+  }
+
+  @ConditionalOnWebApplication(type = Type.REACTIVE)
+  @Primary
+  @Bean
+  public WebSessionIdResolver myWebSessionIdResolver(PthSessionProperties securityCoreProperties) {
+    log.info("111");
+    switch (securityCoreProperties.getSessionPosition()) {
+      case COOKIE -> {
+        CookieWebSessionIdResolver cookieWebSessionIdResolver = new CookieWebSessionIdResolver();
+        cookieWebSessionIdResolver.setCookieName(securityCoreProperties.getSessionKey());
+        return cookieWebSessionIdResolver;
+      }
+      case HEADER -> {
+        HeaderWebSessionIdResolver resolver = new HeaderWebSessionIdResolver();
+        resolver.setHeaderName(securityCoreProperties.getSessionKey());
+        return resolver;
+      }
+      default -> {
+        log.warn("session默认存储在cookie");
+        return new CookieWebSessionIdResolver();
       }
     }
   }

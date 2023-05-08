@@ -6,6 +6,7 @@ import org.springframework.web.server.WebSession;
 import reactor.core.publisher.Mono;
 import vin.pthframework.security.core.consts.SecurityConst;
 import vin.pthframework.security.core.context.SecurityContext;
+import vin.pthframework.security.reactive.util.LoginUtil;
 import vin.pthframework.session.pojo.UserAuthInfo;
 
 /**
@@ -34,7 +35,7 @@ public class ServerSecurityContextRepository {
 
   public Mono<SecurityContext> load(ServerWebExchange exchange) {
     return exchange.getSession().flatMap(session -> {
-      var userAuthInfo = (UserAuthInfo) session.getAttributes().get(SecurityConst.USER_INFO_KEY);
+      var userAuthInfo = LoginUtil.getAuthInfo(session);
       var context = new SecurityContext();
       if (userAuthInfo != null) {
         context.setAuthInfo(userAuthInfo);

@@ -1,4 +1,3 @@
-
 package vin.pthframework.security.core.context;
 
 import lombok.AllArgsConstructor;

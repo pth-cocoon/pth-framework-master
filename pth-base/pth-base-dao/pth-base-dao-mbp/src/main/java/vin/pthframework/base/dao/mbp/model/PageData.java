@@ -13,25 +13,25 @@ import lombok.Data;
 @Data
 public class PageData<T> implements Serializable {
 
-    private long pageSize;
-    private long pageNumber;
-    private long total;
-    private long pageTotal;
-    private Collection<T> list;
+  private long pageSize;
+  private long pageNumber;
+  private long total;
+  private long pageTotal;
+  private Collection<T> list;
 
-    public PageData(Page<T> page) {
-        this.pageSize = page.getPageSize();
-        this.pageNumber = page.getPageNum();
-        this.total = page.getTotal();
-        this.pageTotal = page.getPages();
-        this.list = page.getResult();
-    }
+  public PageData(Page<T> page) {
+    this.pageSize = page.getPageSize();
+    this.pageNumber = page.getPageNum();
+    this.total = page.getTotal();
+    this.pageTotal = page.getPages();
+    this.list = page.getResult();
+  }
 
-    public PageData(PageData<?> page, List<T> list) {
-        this.pageSize = page.getPageSize();
-        this.pageNumber = page.getPageNumber();
-        this.total = page.getTotal();
-        this.pageTotal = page.getPageTotal();
-        this.list = list;
-    }
+  public PageData(PageData<?> page, List<T> list) {
+    this.pageSize = page.getPageSize();
+    this.pageNumber = page.getPageNumber();
+    this.total = page.getTotal();
+    this.pageTotal = page.getPageTotal();
+    this.list = list;
+  }
 }

@@ -1,5 +1,3 @@
-
-
 package vin.pthframework.security.reactive.util;
 
 import java.util.function.Function;

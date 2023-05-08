@@ -9,7 +9,7 @@ import lombok.Data;
 @Data
 public class UsernamePasswordDTO {
 
-    private String username;
-    private String password;
+  private String username;
+  private String password;
 
 }
