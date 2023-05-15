@@ -13,7 +13,7 @@ pth:
       white-list: /session/put
       session-key: token
       session-position: header
-      enable-authorization: on
+      enable-authorization: off
 spring:
   session:
     store-type: redis

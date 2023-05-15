@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import vin.pthframework.security.core.config.SecurityCoreProperties;
@@ -17,11 +18,12 @@ import vin.pthframework.security.core.consts.FilterOrderConst;
 import vin.pthframework.security.core.exception.BaseSecurityException;
 import vin.pthframework.security.core.util.RbacChecker;
 import vin.pthframework.security.servlet.handler.AuthorizationFailureHandler;
-import vin.pthframework.security.servlet.util.SecurityContextHolder;
+import vin.pthframework.security.servlet.util.UserAuthInfoHolder;
 
 @Slf4j
 @RequiredArgsConstructor
 @Component
+@ConditionalOnProperty(prefix = "pth.security.core", value = "enable-authorization")
 @Order(FilterOrderConst.AUTHORIZATION)
 public class ServletAuthenticationFilter implements Filter {
 
@@ -40,9 +42,9 @@ public class ServletAuthenticationFilter implements Filter {
       return;
     }
     try {
-      RbacChecker.check(SecurityContextHolder.getContext(), method, uri);
+      RbacChecker.check(UserAuthInfoHolder.getUserAuthInfo(), method, uri);
       log.info("认证通过，放行：userid:{},uri:{},method:{}",
-          SecurityContextHolder.getContext().getAuthInfo().getId(), uri, method);
+          UserAuthInfoHolder.getUserAuthInfo().getId(), uri, method);
       filterChain.doFilter(servletRequest, servletResponse);
     } catch (BaseSecurityException e) {
       log.error("e", e);

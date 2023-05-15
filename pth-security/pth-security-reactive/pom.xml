@@ -26,10 +26,6 @@
       <groupId>org.springframework.boot</groupId>
     </dependency>
 
-    <dependency>
-      <artifactId>spring-session-data-redis</artifactId>
-      <groupId>org.springframework.session</groupId>
-    </dependency>
 
   </dependencies>
 
@@ -38,7 +34,6 @@
   <parent>
     <artifactId>pth-security</artifactId>
     <groupId>vin.pthframework</groupId>
-    <relativePath>../pom.xml</relativePath>
     <version>0.0.1</version>
   </parent>
 

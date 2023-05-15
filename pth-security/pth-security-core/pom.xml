@@ -28,13 +28,19 @@
       <groupId>org.springframework.boot</groupId>
       <optional>true</optional>
     </dependency>
+
     <dependency>
       <artifactId>spring-session-data-redis</artifactId>
       <groupId>org.springframework.session</groupId>
     </dependency>
+
     <dependency>
       <artifactId>spring-security-crypto</artifactId>
       <groupId>org.springframework.security</groupId>
+    </dependency>
+    <dependency>
+      <artifactId>jackson-datatype-jsr310</artifactId>
+      <groupId>com.fasterxml.jackson.datatype</groupId>
     </dependency>
 
   </dependencies>

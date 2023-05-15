@@ -2,10 +2,11 @@ package vin.pthframework.security.servlet.util;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
-import vin.pthframework.security.core.consts.SecurityConst;
+import vin.pthframework.session.consts.SecurityConst;
 import vin.pthframework.session.pojo.UserAuthInfo;
 
 /**
@@ -16,6 +17,10 @@ public class LoginUtil {
 
   private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
+  static {
+    OBJECT_MAPPER.registerModule(new JavaTimeModule());
+  }
+
   private LoginUtil() {
   }
 
@@ -24,6 +29,7 @@ public class LoginUtil {
     try {
       session.setAttribute(SecurityConst.USER_INFO_KEY,
           OBJECT_MAPPER.writeValueAsString(userAuthInfo));
+      UserAuthInfoHolder.setUserAuthInfo(userAuthInfo);
     } catch (JsonProcessingException e) {
       log.error("e", e);
     }
@@ -32,6 +38,10 @@ public class LoginUtil {
   public static void login(UserAuthInfo userAuthInfo) {
     HttpServletRequest request = HttpUtil.getRequest();
     login(userAuthInfo, request.getSession());
+  }
+
+  public static UserAuthInfo getAuthInfo() {
+    return getAuthInfo(HttpUtil.getRequest().getSession());
   }
 
   public static UserAuthInfo getAuthInfo(HttpSession session) {
@@ -45,5 +55,10 @@ public class LoginUtil {
       log.error("e", e);
       return null;
     }
+  }
+
+  public static void logout() {
+    HttpServletRequest request = HttpUtil.getRequest();
+    request.getSession().removeAttribute(SecurityConst.USER_INFO_KEY);
   }
 }

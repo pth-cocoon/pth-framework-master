@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.Assert;
 import org.springframework.web.server.WebSession;
-import vin.pthframework.security.core.consts.SecurityConst;
+import vin.pthframework.session.consts.SecurityConst;
 import vin.pthframework.session.pojo.UserAuthInfo;
 
 /**

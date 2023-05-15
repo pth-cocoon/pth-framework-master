@@ -3,43 +3,37 @@ package vin.pthframework.security.reactive.util;
 import java.util.function.Function;
 import reactor.core.publisher.Mono;
 import reactor.util.context.Context;
-import vin.pthframework.security.core.context.SecurityContext;
+import vin.pthframework.session.pojo.UserAuthInfo;
 
-/**
- * Allows getting and setting the Spring {@link SecurityContext} into a {@link Context}.
- *
- * @author Rob Winch
- * @since 5.0
- */
 public final class ReactiveSecurityContextHolder {
 
-  private static final Class<?> SECURITY_CONTEXT_KEY = SecurityContext.class;
+  private static final Class<?> AUTH_INFO_CLASS = UserAuthInfo.class;
 
   private ReactiveSecurityContextHolder() {
   }
 
-  public static Mono<SecurityContext> getContext() {
+  public static Mono<UserAuthInfo> getContext() {
     return Mono.subscriberContext()
-        .filter(ReactiveSecurityContextHolder::hasSecurityContext)
-        .flatMap(ReactiveSecurityContextHolder::getSecurityContext);
+        .filter(ReactiveSecurityContextHolder::hasUserAuthInfo)
+        .flatMap(ReactiveSecurityContextHolder::getUserAuthInfo);
   }
 
-  private static boolean hasSecurityContext(Context context) {
-    return context.hasKey(SECURITY_CONTEXT_KEY);
+  private static boolean hasUserAuthInfo(Context context) {
+    return context.hasKey(AUTH_INFO_CLASS);
   }
 
-  private static Mono<SecurityContext> getSecurityContext(Context context) {
-    return context.<Mono<SecurityContext>>get(SECURITY_CONTEXT_KEY);
-  }
-
-
-  public static Function<Context, Context> clearContext() {
-    return (context) -> context.delete(SECURITY_CONTEXT_KEY);
+  private static Mono<UserAuthInfo> getUserAuthInfo(Context context) {
+    return context.<Mono<UserAuthInfo>>get(AUTH_INFO_CLASS);
   }
 
 
-  public static Context withSecurityContext(Mono<SecurityContext> securityContext) {
-    return Context.of(SECURITY_CONTEXT_KEY, securityContext);
+  public static Function<Context, Context> clear() {
+    return (context) -> context.delete(AUTH_INFO_CLASS);
+  }
+
+
+  public static Context withUserAuthInfo(Mono<UserAuthInfo> userAuthInfo) {
+    return Context.of(AUTH_INFO_CLASS, userAuthInfo);
   }
 
 

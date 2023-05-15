@@ -10,10 +10,13 @@ import org.springframework.web.server.WebFilterChain;
 import reactor.core.publisher.Mono;
 import reactor.util.context.Context;
 import vin.pthframework.security.core.consts.FilterOrderConst;
-import vin.pthframework.security.core.context.SecurityContext;
 import vin.pthframework.security.reactive.repository.ServerSecurityContextRepository;
 import vin.pthframework.security.reactive.util.ReactiveSecurityContextHolder;
+import vin.pthframework.session.pojo.UserAuthInfo;
 
+/**
+ * @author Cocoon
+ */
 @Slf4j
 @Order(FilterOrderConst.CONTEXT)
 @Component
@@ -27,14 +30,13 @@ public class ReactorContextWebFilter implements WebFilter {
   public Mono<Void> filter(ServerWebExchange exchange, WebFilterChain chain) {
 
     return chain.filter(exchange).subscriberContext(
-        context -> context.hasKey(SecurityContext.class) ? context
+        context -> context.hasKey(UserAuthInfo.class) ? context
             : withSecurityContext(context, exchange));
   }
 
   private Context withSecurityContext(Context mainContext, ServerWebExchange exchange) {
     return mainContext
-        .putAll(
-            this.repository.load(exchange).as(ReactiveSecurityContextHolder::withSecurityContext));
+        .putAll(this.repository.load(exchange).as(ReactiveSecurityContextHolder::withUserAuthInfo));
   }
 
 }

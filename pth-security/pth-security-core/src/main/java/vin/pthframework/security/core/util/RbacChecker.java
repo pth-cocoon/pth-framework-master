@@ -4,11 +4,11 @@ import java.util.Collection;
 import org.springframework.util.AntPathMatcher;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
-import vin.pthframework.security.core.context.SecurityContext;
 import vin.pthframework.security.core.enums.SecurityErrorCode;
 import vin.pthframework.security.core.exception.BaseSecurityException;
 import vin.pthframework.security.core.factory.SecurityExceptionFactory;
 import vin.pthframework.session.pojo.PthAuthority;
+import vin.pthframework.session.pojo.UserAuthInfo;
 
 /**
  * @author Cocoon
@@ -21,9 +21,8 @@ public class RbacChecker {
   private RbacChecker() {
   }
 
-  public static void check(SecurityContext context, String method, String uri)
+  public static void check(UserAuthInfo authInfo, String method, String uri)
       throws BaseSecurityException {
-    var authInfo = context.getAuthInfo();
     if (authInfo == null) {
       throw SecurityExceptionFactory.getByErrorCode(SecurityErrorCode.NOT_LOGIN);
     }

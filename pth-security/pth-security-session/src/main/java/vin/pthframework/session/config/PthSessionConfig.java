@@ -58,7 +58,6 @@ public class PthSessionConfig {
   @Primary
   @Bean
   public WebSessionIdResolver myWebSessionIdResolver(PthSessionProperties securityCoreProperties) {
-    log.info("111");
     switch (securityCoreProperties.getSessionPosition()) {
       case COOKIE -> {
         CookieWebSessionIdResolver cookieWebSessionIdResolver = new CookieWebSessionIdResolver();

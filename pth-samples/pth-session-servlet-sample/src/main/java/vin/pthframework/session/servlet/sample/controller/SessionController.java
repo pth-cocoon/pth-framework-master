@@ -6,9 +6,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import vin.pthframework.security.core.consts.UserAuthInfoConst;
-import vin.pthframework.security.core.context.SecurityContext;
 import vin.pthframework.security.servlet.util.LoginUtil;
-import vin.pthframework.security.servlet.util.SecurityContextHolder;
+import vin.pthframework.security.servlet.util.UserAuthInfoHolder;
 
 /**
  * @author Cocoon
@@ -28,11 +27,10 @@ public class SessionController {
   @GetMapping("get")
   public Object get(HttpSession session) {
     log.info(session.getId());
-    SecurityContext context = SecurityContextHolder.getContext();
-    if (context.getAuthInfo() == null) {
+    if (UserAuthInfoHolder.getUserAuthInfo() == null) {
       return null;
     }
-    return context.getAuthInfo();
+    return UserAuthInfoHolder.getUserAuthInfo();
   }
 
 

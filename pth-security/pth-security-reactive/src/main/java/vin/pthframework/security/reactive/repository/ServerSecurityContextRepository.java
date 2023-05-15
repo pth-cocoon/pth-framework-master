@@ -4,9 +4,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.server.ServerWebExchange;
 import org.springframework.web.server.WebSession;
 import reactor.core.publisher.Mono;
-import vin.pthframework.security.core.consts.SecurityConst;
-import vin.pthframework.security.core.context.SecurityContext;
 import vin.pthframework.security.reactive.util.LoginUtil;
+import vin.pthframework.session.consts.SecurityConst;
 import vin.pthframework.session.pojo.UserAuthInfo;
 
 /**
@@ -16,12 +15,11 @@ import vin.pthframework.session.pojo.UserAuthInfo;
 public class ServerSecurityContextRepository {
 
 
-  public Mono<Void> save(ServerWebExchange exchange, SecurityContext context) {
+  public Mono<Void> save(ServerWebExchange exchange, UserAuthInfo authInfo) {
     return exchange.getSession().doOnNext(session -> {
-      if (context != null) {
+      if (authInfo != null) {
         UserAuthInfo userAuthInfo =
             (UserAuthInfo) session.getAttributes().get(SecurityConst.USER_INFO_KEY);
-        context.setAuthInfo(userAuthInfo);
         if (userAuthInfo == null) {
           session.getAttributes().remove(SecurityConst.USER_INFO_KEY);
         } else {
@@ -33,14 +31,10 @@ public class ServerSecurityContextRepository {
     }).flatMap(WebSession::changeSessionId);
   }
 
-  public Mono<SecurityContext> load(ServerWebExchange exchange) {
+  public Mono<UserAuthInfo> load(ServerWebExchange exchange) {
     return exchange.getSession().flatMap(session -> {
       var userAuthInfo = LoginUtil.getAuthInfo(session);
-      var context = new SecurityContext();
-      if (userAuthInfo != null) {
-        context.setAuthInfo(userAuthInfo);
-      }
-      return Mono.just(context);
+      return Mono.justOrEmpty(userAuthInfo);
     });
   }
 }

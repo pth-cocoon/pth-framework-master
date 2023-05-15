@@ -16,11 +16,9 @@ import lombok.Setter;
 @Setter
 public abstract class BaseEntity implements Serializable {
 
-  @TableId
+  @TableId()
   private Integer id;
 
-  @TableField(insertStrategy = FieldStrategy.NEVER, updateStrategy = FieldStrategy.NEVER)
-  private LocalDateTime createTime;
 
   @TableField(insertStrategy = FieldStrategy.NEVER, updateStrategy = FieldStrategy.NEVER)
   private LocalDateTime updateTime;

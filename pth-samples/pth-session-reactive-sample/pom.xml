@@ -5,15 +5,16 @@
   <artifactId>pth-session-reactive-sample</artifactId>
   <dependencies>
 
-
-    <dependency>
-      <artifactId>spring-boot-starter-webflux</artifactId>
-      <groupId>org.springframework.boot</groupId>
-    </dependency>
     <dependency>
       <artifactId>pth-security-reactive</artifactId>
       <groupId>vin.pthframework</groupId>
       <version>0.0.1</version>
+    </dependency>
+
+    <dependency>
+      <artifactId>spring-cloud-starter-gateway</artifactId>
+      <groupId>org.springframework.cloud</groupId>
+      <version>3.1.4</version>
     </dependency>
 
 
@@ -21,6 +22,7 @@
       <artifactId>spring-boot-starter-data-redis-reactive</artifactId>
       <groupId>org.springframework.boot</groupId>
     </dependency>
+
     <dependency>
       <artifactId>lombok</artifactId>
       <groupId>org.projectlombok</groupId>
