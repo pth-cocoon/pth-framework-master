@@ -23,7 +23,7 @@ import vin.pthframework.security.servlet.repository.ServletSecurityContextReposi
 @Order(FilterOrderConst.CONTEXT)
 public class SecurityContextFilter implements Filter {
 
-  private ServletSecurityContextRepository servletSecurityContextRepository =
+  private final ServletSecurityContextRepository servletSecurityContextRepository =
       new ServletSecurityContextRepository();
 
   @Override
