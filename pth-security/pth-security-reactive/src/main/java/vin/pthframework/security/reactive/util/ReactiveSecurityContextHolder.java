@@ -5,6 +5,9 @@ import reactor.core.publisher.Mono;
 import reactor.util.context.Context;
 import vin.pthframework.session.pojo.UserAuthInfo;
 
+/**
+ * @author Cocoon
+ */
 public final class ReactiveSecurityContextHolder {
 
   private static final Class<?> AUTH_INFO_CLASS = UserAuthInfo.class;

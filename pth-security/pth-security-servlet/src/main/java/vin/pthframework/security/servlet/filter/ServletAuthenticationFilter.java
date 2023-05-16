@@ -20,6 +20,9 @@ import vin.pthframework.security.core.util.RbacChecker;
 import vin.pthframework.security.servlet.handler.AuthorizationFailureHandler;
 import vin.pthframework.security.servlet.util.UserAuthInfoHolder;
 
+/**
+ * @author Cocoon
+ */
 @Slf4j
 @RequiredArgsConstructor
 @Component

@@ -27,9 +27,9 @@ public class SecurityBeanConfig {
   public AuthorizationFailureHandler authorizationFailureHandler() {
     return (response, e) -> {
       var code = e.getCode() + "";
-      if (code.startsWith("401")) {
+      if (code.startsWith(HttpStatus.UNAUTHORIZED.value() + "")) {
         response.setStatus(HttpStatus.UNAUTHORIZED.value());
-      } else if (code.startsWith("403")) {
+      } else if (code.startsWith(HttpStatus.FORBIDDEN.value() + "")) {
         response.setStatus(HttpStatus.FORBIDDEN.value());
       }
       response.setContentType(MediaType.APPLICATION_JSON.getType());

@@ -11,6 +11,8 @@ import vin.pthframework.security.core.exception.BaseSecurityException;
 public interface AuthorizationFailureHandler {
 
   /**
+   * 鉴权失败处理器.
+   *
    * @param response ServerHttpResponse
    * @param e        AuthorizationException
    * @return Mono
