@@ -2,6 +2,7 @@ package vin.pthframework.security.reactive.filter;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.http.server.reactive.ServerHttpResponse;
@@ -24,6 +25,7 @@ import vin.pthframework.security.reactive.util.ReactiveSecurityContextHolder;
 @Slf4j
 @Order(FilterOrderConst.AUTHORIZATION)
 @Component
+@ConditionalOnProperty(prefix = "pth.security.core", value = "enable-authorization")
 @RequiredArgsConstructor
 public class ReactiveAuthenticationFilter implements WebFilter {
 

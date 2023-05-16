@@ -1,8 +1,8 @@
 package vin.pthframework.base.dao.mbp.entity;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.FieldStrategy;
 import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import lombok.Getter;
@@ -16,15 +16,15 @@ import lombok.Setter;
 @Setter
 public abstract class BaseEntity implements Serializable {
 
-  @TableId()
   private Integer id;
-
 
   @TableField(insertStrategy = FieldStrategy.NEVER, updateStrategy = FieldStrategy.NEVER)
   private LocalDateTime updateTime;
 
-  private String createUserId;
+  @TableField(fill = FieldFill.INSERT)
+  private Integer createUserId;
 
-  private String updateUserId;
+  @TableField(fill = FieldFill.INSERT_UPDATE)
+  private Integer updateUserId;
 
 }

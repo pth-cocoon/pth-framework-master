@@ -12,6 +12,7 @@ import vin.pthframework.base.dao.mbp.model.PageParam;
  * @date 2022/11/22
  */
 @Slf4j
+@SuppressWarnings("unused")
 public class PageUtil {
 
   private PageUtil() {
