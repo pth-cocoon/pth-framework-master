@@ -1,34 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://maven.apache.org/POM/4.0.0"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <parent>
-    <artifactId>pth-samples</artifactId>
-    <groupId>vin.pth</groupId>
-    <version>${revision}</version>
-  </parent>
-  <modelVersion>4.0.0</modelVersion>
-
-  <artifactId>pth-session-servlet-sample</artifactId>
-
-  <properties>
-    <maven.compiler.source>17</maven.compiler.source>
-    <maven.compiler.target>17</maven.compiler.target>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  </properties>
-
-
   <dependencies>
     <dependency>
-      <groupId>vin.pth</groupId>
-      <artifactId>pth-security-authentication</artifactId>
-      <version>${revision}</version>
-    </dependency>
-
-    <dependency>
-      <groupId>vin.pth</groupId>
-      <artifactId>pth-security-authorization</artifactId>
-      <version>${revision}</version>
+      <artifactId>pth-security-servlet</artifactId>
+      <groupId>vin.pthframework</groupId>
+      <version>0.0.1</version>
     </dependency>
 
     <dependency>
@@ -36,11 +14,7 @@
       <artifactId>spring-boot-starter-web</artifactId>
     </dependency>
 
-    <dependency>
-      <groupId>vin.pth</groupId>
-      <artifactId>pth-session-data-redis</artifactId>
-      <version>${revision}</version>
-    </dependency>
+
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-data-redis</artifactId>
@@ -50,5 +24,15 @@
       <artifactId>lombok</artifactId>
     </dependency>
   </dependencies>
+  <modelVersion>4.0.0</modelVersion>
+
+  <artifactId>pth-session-servlet-sample</artifactId>
+
+  <parent>
+    <artifactId>pth-samples</artifactId>
+    <groupId>vin.pthframework</groupId>
+    <version>0.0.1</version>
+  </parent>
+
 
 </project>

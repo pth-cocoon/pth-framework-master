@@ -1,14 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://maven.apache.org/POM/4.0.0"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>vin.pth</groupId>
+  <build>
+    <plugins>
+
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>17</source>
+          <target>17</target>
+        </configuration>
+        <groupId>org.apache.maven.plugins</groupId>
+        <version>3.1</version>
+      </plugin>
+
+      <plugin>
+        <artifactId>maven-source-plugin</artifactId>
+        <configuration>
+          <attach>true</attach>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+            <phase>compile</phase>
+          </execution>
+        </executions>
+        <version>3.0.1</version>
+      </plugin>
+
+    </plugins>
+
+  </build>
   <artifactId>pth-framework-master</artifactId>
-  <version>${revision}</version>
+  <groupId>vin.pthframework</groupId>
   <modules>
-    <module>pth-session</module>
     <module>pth-samples</module>
     <module>pth-security</module>
     <module>pth-base</module>
@@ -17,6 +47,7 @@
 
   <properties>
     <revision>0.0.1</revision>
+    <java.version>17</java.version>
     <maven.compiler.source>17</maven.compiler.source>
     <maven.compiler.target>17</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -47,54 +78,6 @@
     </repository>
   </distributionManagement>
 
-  <build>
-    <plugins>
-      <plugin>
-        <artifactId>maven-source-plugin</artifactId>
-        <configuration>
-          <attach>true</attach>
-        </configuration>
-        <executions>
-          <execution>
-            <goals>
-              <goal>jar</goal>
-            </goals>
-            <phase>compile</phase>
-          </execution>
-        </executions>
-        <version>3.0.1</version>
-      </plugin>
-
-
-      <!-- 统一版本号管理 -->
-      <plugin>
-        <artifactId>flatten-maven-plugin</artifactId>
-        <configuration>
-          <flattenMode>resolveCiFriendliesOnly</flattenMode>
-          <updatePomFile>true</updatePomFile>
-        </configuration>
-        <executions>
-          <execution>
-            <goals>
-              <goal>flatten</goal>
-            </goals>
-            <id>flatten</id>
-            <phase>process-resources</phase>
-          </execution>
-          <execution>
-            <goals>
-              <goal>clean</goal>
-            </goals>
-            <id>flatten.clean</id>
-            <phase>clean</phase>
-          </execution>
-        </executions>
-        <groupId>org.codehaus.mojo</groupId>
-        <version>1.2.7</version>
-      </plugin>
-
-    </plugins>
-
-  </build>
+  <version>0.0.1</version>
 
 </project>

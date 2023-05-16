@@ -1,16 +1,23 @@
 server:
-  port: 9091
-spring:
-  redis:
-    host: ${redis_host}
-    password: ${redis_password}
+  port: 19091
+  servlet:
+    encoding:
+      force-response: true
 pth:
   session:
-    store-type: REDIS
-    request-position: header
-    session-id-key: token
+    core:
+      session-position: header
+      session-key: token
   security:
-    authorization:
-      white-list:
-        - uri: /login
-          method: POST
+    core:
+      white-list: /session/put
+      enable-authorization: on
+spring:
+  session:
+    store-type: redis
+    redis:
+      save-mode: always
+  redis:
+    password: cocoon
+    host: 127.0.0.1
+    port: 6379

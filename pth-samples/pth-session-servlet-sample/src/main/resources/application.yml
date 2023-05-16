@@ -1,19 +1,23 @@
 server:
   port: 19090
-spring:
-  redis:
-    host: ${redis_host}
-    password: ${redis_password}
+  servlet:
+    encoding:
+      force-response: true
 pth:
   session:
-    store-type: REDIS
-    request-position: header
-    session-id-key: token
+    core:
+      session-position: header
+      session-key: token
   security:
-    authorization:
-      test: test
-      white-list:
-        - uri: /**
-    authentication:
-      login-uri: /login
-
+    core:
+      white-list: /session/put
+      session-key: token
+      session-position: header
+      enable-authorization: off
+spring:
+  session:
+    store-type: redis
+    redis:
+      save-mode: always
+  redis:
+    password: cocoon
