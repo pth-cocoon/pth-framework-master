@@ -1,9 +1,11 @@
 package vin.pthframework.security.core.util;
 
 import java.util.Collection;
+import java.util.Objects;
 import org.springframework.util.AntPathMatcher;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
+import vin.pthframework.security.core.consts.UserAuthInfoConst;
 import vin.pthframework.security.core.enums.SecurityErrorCode;
 import vin.pthframework.security.core.exception.BaseSecurityException;
 import vin.pthframework.security.core.factory.SecurityExceptionFactory;
@@ -24,6 +26,9 @@ public class RbacChecker {
   public static void check(UserAuthInfo authInfo, String method, String uri)
       throws BaseSecurityException {
     if (authInfo == null) {
+      throw SecurityExceptionFactory.getByErrorCode(SecurityErrorCode.NOT_LOGIN);
+    }
+    if (Objects.equals(authInfo.getId(), UserAuthInfoConst.ANONYMOUS.getId())) {
       throw SecurityExceptionFactory.getByErrorCode(SecurityErrorCode.NOT_LOGIN);
     }
     SecurityAccessAssert.checkUser(authInfo);

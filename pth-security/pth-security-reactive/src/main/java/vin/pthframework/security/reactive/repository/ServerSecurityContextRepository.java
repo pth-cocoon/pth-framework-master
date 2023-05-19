@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.server.ServerWebExchange;
 import org.springframework.web.server.WebSession;
 import reactor.core.publisher.Mono;
+import vin.pthframework.security.core.consts.UserAuthInfoConst;
 import vin.pthframework.security.reactive.util.LoginUtil;
 import vin.pthframework.session.consts.SecurityConst;
 import vin.pthframework.session.pojo.UserAuthInfo;
@@ -34,7 +35,10 @@ public class ServerSecurityContextRepository {
   public Mono<UserAuthInfo> load(ServerWebExchange exchange) {
     return exchange.getSession().flatMap(session -> {
       var userAuthInfo = LoginUtil.getAuthInfo(session);
-      return Mono.justOrEmpty(userAuthInfo);
+      if (userAuthInfo == null) {
+        userAuthInfo = UserAuthInfoConst.ANONYMOUS;
+      }
+      return Mono.just(userAuthInfo);
     });
   }
 }

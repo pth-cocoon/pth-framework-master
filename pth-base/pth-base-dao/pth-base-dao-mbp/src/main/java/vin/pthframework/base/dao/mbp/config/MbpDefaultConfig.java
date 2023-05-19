@@ -19,9 +19,10 @@ public class MbpDefaultConfig {
     System.setProperty("pagehelper.banner", "false");
   }
 
-  @ConditionalOnBean(value = CurrentUserService.class)
+  @ConditionalOnBean(CurrentUserService.class)
   @Bean
   public MbpOperatorHandler mbpOperatorHandler(CurrentUserService currentUserService) {
     return new MbpOperatorHandler(currentUserService);
   }
+
 }

@@ -21,6 +21,9 @@ public abstract class BaseEntity implements Serializable {
   @TableField(insertStrategy = FieldStrategy.NEVER, updateStrategy = FieldStrategy.NEVER)
   private LocalDateTime updateTime;
 
+  @TableField(insertStrategy = FieldStrategy.NEVER, updateStrategy = FieldStrategy.NEVER)
+  private LocalDateTime createTime;
+
   @TableField(fill = FieldFill.INSERT)
   private Integer createUserId;
 

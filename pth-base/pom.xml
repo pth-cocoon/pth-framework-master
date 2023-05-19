@@ -5,6 +5,7 @@
   <parent>
     <artifactId>pth-framework-master</artifactId>
     <groupId>vin.pthframework</groupId>
+    <relativePath>../pom.xml</relativePath>
     <version>0.0.1</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>

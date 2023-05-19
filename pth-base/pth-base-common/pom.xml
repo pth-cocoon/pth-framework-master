@@ -10,6 +10,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <artifactId>pth-base-common</artifactId>
+
   <dependencies>
     <dependency>
       <groupId>org.projectlombok</groupId>
