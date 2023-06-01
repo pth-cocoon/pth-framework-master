@@ -11,4 +11,8 @@ public class AuthorizationException extends BaseSecurityException {
   public AuthorizationException(ErrorCode errorCode) {
     super(errorCode);
   }
+
+  public AuthorizationException(ErrorCode errorCode, String message) {
+    super(errorCode.getCode(), message);
+  }
 }

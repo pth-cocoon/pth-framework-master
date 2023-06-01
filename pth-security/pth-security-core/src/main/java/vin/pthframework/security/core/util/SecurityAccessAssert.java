@@ -18,4 +18,10 @@ public class SecurityAccessAssert {
       throw new AuthorizationException(SecurityErrorCode.CODE403);
     }
   }
+
+  public static void checkCredentials(boolean expression, String message) {
+    if (!expression) {
+      throw new AuthorizationException(SecurityErrorCode.INVALID_CREDENTIALS, message);
+    }
+  }
 }
