@@ -36,6 +36,7 @@
     </plugins>
 
   </build>
+  <version>0.0.1</version>
   <artifactId>pth-framework-master</artifactId>
   <groupId>vin.pthframework</groupId>
   <modules>
@@ -72,12 +73,11 @@
 
   <distributionManagement>
     <repository>
-      <id>qcloud_153020-pth-common</id>
+      <id>sbtx-pth-common</id>
       <name>common</name>
-      <url>https://qcloud_153020-maven.pkg.coding.net/repository/pth/common/</url>
+      <url>https://sbtx-maven.pkg.coding.net/repository/pth/common/</url>
     </repository>
   </distributionManagement>
 
-  <version>0.0.1</version>
 
 </project>
