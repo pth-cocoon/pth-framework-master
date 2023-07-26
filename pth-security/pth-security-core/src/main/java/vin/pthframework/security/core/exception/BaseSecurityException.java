@@ -12,7 +12,7 @@ public abstract class BaseSecurityException extends RuntimeException {
   private final int code;
 
 
-  private BaseSecurityException(int code, String message) {
+  protected BaseSecurityException(int code, String message) {
     super(message);
     this.code = code;
   }

@@ -13,6 +13,7 @@ public enum SecurityErrorCode implements ErrorCode {
    * 未登录.
    */
   NOT_LOGIN(401001, "登录后重试"),
+  BAD_CREDENTIALS(401002, "凭证不合法"),
   CODE403(403001, "没有权限"),
 
   ;
