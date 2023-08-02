@@ -11,9 +11,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.core.io.buffer.DataBufferFactory;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.server.reactive.ServerHttpResponse;
 import reactor.core.publisher.Mono;
-import vin.pthframework.security.core.exception.BaseSecurityException;
 import vin.pthframework.security.core.util.ResultUtil;
 import vin.pthframework.security.reactive.handler.AuthorizationFailureHandler;
 
@@ -31,6 +29,7 @@ public class SecurityBeanConfig {
   @Bean
   public AuthorizationFailureHandler authorizationFailureHandler() {
     return (response, e) -> {
+        log.warn("认证失败,message:{}",e.getMessage());
       String codeStr = (String.valueOf(e.getCode())).substring(0, 3);
       switch (Integer.parseInt(codeStr)) {
         case 401 -> response.setStatusCode(HttpStatus.UNAUTHORIZED);

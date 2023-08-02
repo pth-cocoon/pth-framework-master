@@ -47,6 +47,7 @@ public class ReactiveAuthenticationFilter implements WebFilter {
 
     return ReactiveSecurityContextHolder.getContext().flatMap(se -> {
       RbacChecker.check(se, method, uri);
+      log.info("认证通过，进行后续流程");
       return chain.filter(exchange);
     }).onErrorResume(BaseSecurityException.class,
         e -> authorizationFailureHandler.failureHandler(response, e));
