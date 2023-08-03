@@ -17,7 +17,7 @@ import vin.pthframework.security.core.consts.FilterOrderConst;
 import vin.pthframework.security.core.exception.BaseSecurityException;
 import vin.pthframework.security.core.util.RbacChecker;
 import vin.pthframework.security.reactive.handler.AuthorizationFailureHandler;
-import vin.pthframework.security.reactive.util.ReactiveSecurityContextHolder;
+import vin.pthframework.session.pojo.UserAuthInfo;
 
 /**
  * @author Cocoon
@@ -44,12 +44,15 @@ public class ReactiveAuthenticationFilter implements WebFilter {
       log.info("{}路径属于白名单，跳过校验", request.getURI().getPath());
       return chain.filter(exchange);
     }
-
-    return ReactiveSecurityContextHolder.getContext().flatMap(se -> {
-      RbacChecker.check(se, method, uri);
+    try {
+      Object userInfo = exchange.getAttribute("userInfo");
+      // 进行RBAC校验
+      RbacChecker.check((UserAuthInfo) userInfo, method, uri);
+      // RBAC校验通过，继续处理请求
       return chain.filter(exchange);
-    }).onErrorResume(BaseSecurityException.class,
-        e -> authorizationFailureHandler.failureHandler(response, e));
+    } catch (BaseSecurityException e) {
+      return authorizationFailureHandler.failureHandler(response, e);
+    }
   }
 
 }

@@ -7,12 +7,11 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import org.springframework.web.server.WebFilter;
 import org.springframework.web.server.WebFilterChain;
+import org.springframework.web.server.session.WebSessionManager;
 import reactor.core.publisher.Mono;
-import reactor.util.context.Context;
 import vin.pthframework.security.core.consts.FilterOrderConst;
 import vin.pthframework.security.reactive.repository.ServerSecurityContextRepository;
-import vin.pthframework.security.reactive.util.ReactiveSecurityContextHolder;
-import vin.pthframework.session.pojo.UserAuthInfo;
+import vin.pthframework.session.consts.SecurityConst;
 
 /**
  * @author Cocoon
@@ -23,21 +22,22 @@ import vin.pthframework.session.pojo.UserAuthInfo;
 @RequiredArgsConstructor
 public class ReactorContextWebFilter implements WebFilter {
 
-  private final ServerSecurityContextRepository repository = new ServerSecurityContextRepository();
-
+  private final WebSessionManager webSessionManager;
 
   @Override
   public Mono<Void> filter(ServerWebExchange exchange, WebFilterChain chain) {
 
-    return chain.filter(exchange).subscriberContext(
-        context -> context.hasKey(UserAuthInfo.class) ? context
-            : withSecurityContext(context, exchange));
+    return webSessionManager.getSession(exchange)
+        .flatMap(session -> {
+          Object userInfo = session.getAttribute("userInfo");
+          log.info("处理用户信息,当前用户,{}", userInfo);
+          if (userInfo != null) {
+            exchange.getAttributes().put(SecurityConst.USER_INFO_KEY, userInfo);
+          }
+          return chain.filter(exchange);
+        });
   }
 
-  private Context withSecurityContext(Context mainContext, ServerWebExchange exchange) {
-    return mainContext
-        .putAll(this.repository.load(exchange).as(ReactiveSecurityContextHolder::withUserAuthInfo));
-  }
 
 }
 
