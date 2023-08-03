@@ -17,6 +17,7 @@ import vin.pthframework.security.core.consts.FilterOrderConst;
 import vin.pthframework.security.core.exception.BaseSecurityException;
 import vin.pthframework.security.core.util.RbacChecker;
 import vin.pthframework.security.reactive.handler.AuthorizationFailureHandler;
+import vin.pthframework.session.consts.SecurityConst;
 import vin.pthframework.session.pojo.UserAuthInfo;
 
 /**
@@ -45,7 +46,7 @@ public class ReactiveAuthenticationFilter implements WebFilter {
       return chain.filter(exchange);
     }
     try {
-      Object userInfo = exchange.getAttribute("userInfo");
+      Object userInfo = exchange.getAttribute(SecurityConst.USER_INFO_KEY);
       // 进行RBAC校验
       RbacChecker.check((UserAuthInfo) userInfo, method, uri);
       // RBAC校验通过，继续处理请求
