@@ -11,8 +11,6 @@ pth:
   security:
     core:
       white-list: /session/put
-      session-key: token
-      session-position: header
       enable-authorization: off
 spring:
   session:

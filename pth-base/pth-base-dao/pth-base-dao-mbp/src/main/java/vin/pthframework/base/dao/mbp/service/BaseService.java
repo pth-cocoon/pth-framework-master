@@ -2,6 +2,7 @@ package vin.pthframework.base.dao.mbp.service;
 
 import com.baomidou.mybatisplus.extension.toolkit.Db;
 import java.lang.reflect.ParameterizedType;
+import java.util.Collection;
 import java.util.List;
 import lombok.Getter;
 import org.springframework.util.Assert;
@@ -29,6 +30,10 @@ public abstract class BaseService<T extends BaseEntity> {
     boolean result = Db.save(model);
     Assert.isTrue(result, "创建数据失败");
     return getById(model.getId());
+  }
+
+  public void createBatch(Collection<T> model) {
+    model.forEach(this::create);
   }
 
   public T update(T model) {

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import vin.pthframework.security.core.consts.UserAuthInfoConst;
 import vin.pthframework.security.servlet.util.LoginUtil;
 import vin.pthframework.security.servlet.util.UserAuthInfoHolder;
+import vin.pthframework.session.pojo.UserAuthInfo;
 
 /**
  * @author Cocoon
