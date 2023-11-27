@@ -1,5 +1,6 @@
 package vin.pthframework.base.dao.mbp.service;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.toolkit.Db;
 import java.lang.reflect.ParameterizedType;
 import java.util.Collection;
@@ -24,6 +25,7 @@ public abstract class BaseService<T extends BaseEntity> {
     return Db.getById(id, getModelClass());
   }
 
+  @SuppressWarnings("unused")
   public T create(T model) {
     Assert.notNull(model, "数据为空");
     Assert.isNull(model.getId(), "创建操作id必须为空");
@@ -51,6 +53,9 @@ public abstract class BaseService<T extends BaseEntity> {
 
   public List<T> findAll() {
     return Db.list(getModelClass());
+  }
+  public LambdaQueryWrapper<T> getBaseWrapper(){
+    return new LambdaQueryWrapper<>();
   }
 
 

@@ -39,9 +39,11 @@ public class PthSessionConfig {
   public HttpSessionIdResolver httpSessionIdResolver(PthSessionProperties securityCoreProperties) {
     switch (securityCoreProperties.getSessionPosition()) {
       case COOKIE -> {
+        log.info("session.mode=cookie");
         return new CookieHttpSessionIdResolver();
       }
       case HEADER -> {
+        log.info("session.mode=header,sessionKey:{}",securityCoreProperties.getSessionKey());
         return new HeaderHttpSessionIdResolver(securityCoreProperties.getSessionKey());
       }
       default -> {
