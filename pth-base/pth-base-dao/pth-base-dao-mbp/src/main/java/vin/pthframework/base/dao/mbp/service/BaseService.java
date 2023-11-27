@@ -1,5 +1,6 @@
 package vin.pthframework.base.dao.mbp.service;
 
+import com.baomidou.mybatisplus.core.conditions.AbstractWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.toolkit.Db;
 import java.lang.reflect.ParameterizedType;
@@ -54,7 +55,16 @@ public abstract class BaseService<T extends BaseEntity> {
   public List<T> findAll() {
     return Db.list(getModelClass());
   }
-  public LambdaQueryWrapper<T> getBaseWrapper(){
+
+  public List<T> findByWrapper(AbstractWrapper<T, ?, ?> queryWrapper) {
+    return Db.list(queryWrapper);
+  }
+
+  public T getOneByWrapper(AbstractWrapper<T, ?, ?> wrapper) {
+    return Db.getOne(wrapper);
+  }
+
+  public LambdaQueryWrapper<T> getBaseWrapper() {
     return new LambdaQueryWrapper<>();
   }
 
