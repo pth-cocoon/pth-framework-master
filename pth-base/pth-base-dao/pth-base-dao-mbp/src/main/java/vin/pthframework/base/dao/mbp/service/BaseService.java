@@ -56,11 +56,11 @@ public abstract class BaseService<T extends BaseEntity> {
     return Db.list(getModelClass());
   }
 
-  public List<T> findByWrapper(AbstractWrapper<T, ?, ?> queryWrapper) {
+  public List<T> find(AbstractWrapper<T, ?, ?> queryWrapper) {
     return Db.list(queryWrapper);
   }
 
-  public T getOneByWrapper(AbstractWrapper<T, ?, ?> wrapper) {
+  public T getOne(AbstractWrapper<T, ?, ?> wrapper) {
     return Db.getOne(wrapper);
   }
 
