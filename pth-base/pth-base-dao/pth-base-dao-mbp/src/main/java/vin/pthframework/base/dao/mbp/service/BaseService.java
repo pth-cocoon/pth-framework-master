@@ -65,7 +65,7 @@ public abstract class BaseService<T extends BaseEntity> {
   }
 
   public LambdaQueryWrapper<T> getBaseWrapper() {
-    return new LambdaQueryWrapper<>();
+    return new LambdaQueryWrapper<>(getModelClass());
   }
 
 
