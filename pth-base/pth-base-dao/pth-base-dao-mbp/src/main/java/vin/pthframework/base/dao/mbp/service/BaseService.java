@@ -42,6 +42,7 @@ public abstract class BaseService<T extends BaseEntity> {
   public T update(T model) {
     Assert.notNull(model, "数据为空");
     Assert.notNull(model.getId(), "更新操作id不允许为空");
+    Assert.isTrue(model.getId()>0,"无法更新Id=0的数据");
     boolean result = Db.updateById(model);
     Assert.isTrue(result, "更新数据失败");
     return getById(model.getId());
