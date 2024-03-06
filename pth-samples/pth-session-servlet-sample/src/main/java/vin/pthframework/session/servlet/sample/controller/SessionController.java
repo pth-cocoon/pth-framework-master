@@ -1,6 +1,6 @@
 package vin.pthframework.session.servlet.sample.controller;
 
-import javax.servlet.http.HttpSession;
+import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RestController;
 import vin.pthframework.security.core.consts.UserAuthInfoConst;
 import vin.pthframework.security.servlet.util.LoginUtil;
 import vin.pthframework.security.servlet.util.UserAuthInfoHolder;
-import vin.pthframework.session.pojo.UserAuthInfo;
 
 /**
  * @author Cocoon

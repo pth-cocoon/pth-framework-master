@@ -1,6 +1,6 @@
 package vin.pthframework.security.servlet.handler;
 
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletResponse;
 import vin.pthframework.security.core.exception.BaseSecurityException;
 
 /**

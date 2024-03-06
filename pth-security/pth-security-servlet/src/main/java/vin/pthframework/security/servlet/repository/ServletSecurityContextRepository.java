@@ -1,7 +1,7 @@
 package vin.pthframework.security.servlet.repository;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import vin.pthframework.security.servlet.util.LoginUtil;
 import vin.pthframework.security.servlet.util.UserAuthInfoHolder;
 import vin.pthframework.session.consts.SecurityConst;

@@ -3,9 +3,10 @@ package vin.pthframework.security.servlet.util;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.util.Assert;
 import vin.pthframework.session.consts.SecurityConst;
 import vin.pthframework.session.pojo.UserAuthInfo;
 
@@ -13,6 +14,7 @@ import vin.pthframework.session.pojo.UserAuthInfo;
  * @author Cocoon
  */
 @Slf4j
+@SuppressWarnings("unused")
 public class LoginUtil {
 
   private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
@@ -36,12 +38,17 @@ public class LoginUtil {
   }
 
   public static void login(UserAuthInfo userAuthInfo) {
-    HttpServletRequest request = HttpUtil.getRequest();
-    login(userAuthInfo, request.getSession());
+    login(userAuthInfo, getRequest().getSession());
   }
 
   public static UserAuthInfo getAuthInfo() {
-    return getAuthInfo(HttpUtil.getRequest().getSession());
+    return getAuthInfo(getRequest().getSession());
+  }
+
+  private static HttpServletRequest getRequest() {
+    var request = HttpUtil.getRequest();
+    Assert.notNull(request, "request is null");
+    return request;
   }
 
   public static UserAuthInfo getAuthInfo(HttpSession session) {
@@ -59,6 +66,7 @@ public class LoginUtil {
 
   public static void logout() {
     HttpServletRequest request = HttpUtil.getRequest();
+    Assert.notNull(request, "request is null");
     request.getSession().removeAttribute(SecurityConst.USER_INFO_KEY);
   }
 }
