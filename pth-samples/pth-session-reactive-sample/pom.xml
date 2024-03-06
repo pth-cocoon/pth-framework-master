@@ -9,7 +9,7 @@
   <parent>
     <artifactId>pth-samples</artifactId>
     <groupId>vin.pthframework</groupId>
-    <version>0.0.1</version>
+    <version>${revision}</version>
   </parent>
   <dependencies>
     <dependency>
