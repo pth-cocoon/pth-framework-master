@@ -11,15 +11,11 @@
     <version>${revision}</version>
   </parent>
 
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  </properties>
-
   <dependencies>
     <dependency>
       <artifactId>pth-security-core</artifactId>
       <groupId>vin.pthframework</groupId>
-      <version>0.0.1</version>
+      <version>${project.version}</version>
     </dependency>
 
     <dependency>

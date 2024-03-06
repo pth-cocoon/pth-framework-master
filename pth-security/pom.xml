@@ -2,23 +2,20 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns="http://maven.apache.org/POM/4.0.0"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <artifactId>pth-security</artifactId>
-  <modelVersion>4.0.0</modelVersion>
-
   <parent>
     <artifactId>pth-framework-master</artifactId>
     <groupId>vin.pthframework</groupId>
     <version>${revision}</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
-
+  <modelVersion>4.0.0</modelVersion>
+  <packaging>pom</packaging>
+  <artifactId>pth-security</artifactId>
   <modules>
     <module>pth-security-core</module>
     <module>pth-security-servlet</module>
     <module>pth-security-reactive</module>
     <module>pth-security-session</module>
   </modules>
-  <packaging>pom</packaging>
-
 
 </project>
