@@ -3,12 +3,19 @@
   xmlns="http://maven.apache.org/POM/4.0.0"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <artifactId>pth-session-reactive-sample</artifactId>
-  <dependencies>
+  <modelVersion>4.0.0</modelVersion>
 
+
+  <parent>
+    <artifactId>pth-samples</artifactId>
+    <groupId>vin.pthframework</groupId>
+    <version>0.0.1</version>
+  </parent>
+  <dependencies>
     <dependency>
       <artifactId>pth-security-reactive</artifactId>
       <groupId>vin.pthframework</groupId>
-      <version>0.0.1</version>
+      <version>${revision}</version>
     </dependency>
 
     <dependency>
@@ -29,13 +36,5 @@
     </dependency>
   </dependencies>
 
-  <modelVersion>4.0.0</modelVersion>
-
-
-  <parent>
-    <artifactId>pth-samples</artifactId>
-    <groupId>vin.pthframework</groupId>
-    <version>0.0.1</version>
-  </parent>
 
 </project>

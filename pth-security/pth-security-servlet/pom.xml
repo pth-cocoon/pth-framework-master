@@ -3,6 +3,18 @@
   xmlns="http://maven.apache.org/POM/4.0.0"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <artifactId>pth-security-servlet</artifactId>
+
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <artifactId>pth-security</artifactId>
+    <groupId>vin.pthframework</groupId>
+    <version>${revision}</version>
+  </parent>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
   <dependencies>
     <dependency>
       <artifactId>pth-security-core</artifactId>
@@ -16,23 +28,7 @@
       <scope>compile</scope>
     </dependency>
 
-    <dependency>
-      <artifactId>pth-security-core</artifactId>
-      <groupId>vin.pthframework</groupId>
-      <version>0.0.1</version>
-    </dependency>
   </dependencies>
 
-  <modelVersion>4.0.0</modelVersion>
-
-  <parent>
-    <artifactId>pth-security</artifactId>
-    <groupId>vin.pthframework</groupId>
-    <version>0.0.1</version>
-  </parent>
-
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  </properties>
 
 </project>

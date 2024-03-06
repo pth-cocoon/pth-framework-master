@@ -5,6 +5,13 @@
   <artifactId>pth-security</artifactId>
   <modelVersion>4.0.0</modelVersion>
 
+  <parent>
+    <artifactId>pth-framework-master</artifactId>
+    <groupId>vin.pthframework</groupId>
+    <version>${revision}</version>
+    <relativePath>../pom.xml</relativePath>
+  </parent>
+
   <modules>
     <module>pth-security-core</module>
     <module>pth-security-servlet</module>
@@ -12,11 +19,6 @@
     <module>pth-security-session</module>
   </modules>
   <packaging>pom</packaging>
-  <parent>
-    <artifactId>pth-framework-master</artifactId>
-    <groupId>vin.pthframework</groupId>
-    <relativePath>../pom.xml</relativePath>
-    <version>0.0.1</version>
-  </parent>
+
 
 </project>

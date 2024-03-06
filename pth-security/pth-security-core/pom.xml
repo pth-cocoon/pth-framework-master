@@ -7,7 +7,7 @@
     <dependency>
       <artifactId>pth-security-session</artifactId>
       <groupId>vin.pthframework</groupId>
-      <version>0.0.1</version>
+      <version>${revision}</version>
     </dependency>
 
     <dependency>
@@ -51,8 +51,8 @@
   <parent>
     <artifactId>pth-security</artifactId>
     <groupId>vin.pthframework</groupId>
+    <version>${revision}</version>
     <relativePath>../pom.xml</relativePath>
-    <version>0.0.1</version>
   </parent>
 
 </project>
