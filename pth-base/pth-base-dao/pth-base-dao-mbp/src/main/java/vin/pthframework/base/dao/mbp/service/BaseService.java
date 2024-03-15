@@ -102,6 +102,12 @@ public abstract class BaseService<T extends BaseEntity> {
     return Db.list(queryWrapper);
   }
 
+  public List<T> findByIds(Collection<Integer> ids) {
+    LambdaQueryWrapper<T> baseWrapper = getBaseWrapper();
+    baseWrapper.in(BaseEntity::getId, ids);
+    return Db.list(baseWrapper);
+  }
+
   public T getOne(AbstractWrapper<T, ?, ?> wrapper) {
     return Db.getOne(wrapper);
   }
