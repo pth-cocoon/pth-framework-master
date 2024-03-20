@@ -17,7 +17,7 @@ public class PageData<T> implements Serializable {
   private long pageNumber;
   private long total;
   private long pageTotal;
-  private Collection<T> list;
+  private List<T> list;
 
   public PageData(Page<T> page) {
     this.pageSize = page.getPageSize();
