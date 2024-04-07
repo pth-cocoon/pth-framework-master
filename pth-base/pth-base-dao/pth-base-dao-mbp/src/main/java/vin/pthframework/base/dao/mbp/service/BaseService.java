@@ -3,10 +3,10 @@ package vin.pthframework.base.dao.mbp.service;
 import com.baomidou.mybatisplus.core.conditions.AbstractWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.toolkit.Db;
+import jakarta.annotation.Nullable;
 import java.lang.reflect.ParameterizedType;
 import java.util.Collection;
 import java.util.List;
-import lombok.Getter;
 import org.springframework.util.Assert;
 import vin.pthframework.base.dao.mbp.entity.BaseEntity;
 
@@ -28,11 +28,16 @@ public abstract class BaseService<T extends BaseEntity> {
 
   }
 
-  @Getter
+
   @SuppressWarnings("unchecked")
   private final Class<T> modelClass =
       (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
 
+  private Class<T> getModelClass(){
+    return this.modelClass;
+  }
+
+  @Nullable
   public T getById(Integer id) {
     Assert.notNull(id, "ID为空");
     return Db.getById(id, getModelClass());
@@ -44,7 +49,7 @@ public abstract class BaseService<T extends BaseEntity> {
    * @param model 创建.
    * @return model.
    */
-  @SuppressWarnings("unused")
+  @SuppressWarnings("UnusedReturnValue")
   public T create(T model) {
     createCheck();
     Assert.notNull(model, "数据为空");
@@ -61,6 +66,7 @@ public abstract class BaseService<T extends BaseEntity> {
    * @param model 根据ID update
    * @return model.
    */
+  @SuppressWarnings("UnusedReturnValue")
   public T update(T model) {
     updateCheck();
     Assert.notNull(model, "数据为空");
@@ -108,6 +114,7 @@ public abstract class BaseService<T extends BaseEntity> {
     return Db.list(baseWrapper);
   }
 
+  @Nullable
   public T getOne(AbstractWrapper<T, ?, ?> wrapper) {
     return Db.getOne(wrapper);
   }
